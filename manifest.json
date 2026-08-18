@@ -1,0 +1,10 @@
+{
+  "name": "CloudTentO \u2013 Hyderabad Event Planning & Rental Network",
+  "short_name": "CloudTentO",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
+  "description": "Plan venues, catering packages and event equipment in one PWA.",
+  "icons": []
+}
