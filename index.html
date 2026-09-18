@@ -127,6 +127,24 @@
             background: white; border-bottom: 1px solid #e2e8f0;
             position: sticky; top: 0; z-index: 50;
         }
+        /* 44px minimum tap area on the two header links */
+        header.vendor-header a {
+            display: inline-flex; align-items: center; min-height: 44px;
+        }
+
+        /* Sticky bottom action bar for the wizard's Back/Continue buttons.
+           On phones this pins them to the bottom of the screen so the thumb
+           never has to travel back up the form to advance a step. */
+        @media (max-width: 640px) {
+            .wizard-card { padding-bottom: 92px; }
+            .wizard-nav-row {
+                position: fixed; left: 0; right: 0; bottom: 0; margin: 0 !important;
+                background: white; border-top: 1px solid #e2e8f0;
+                padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+                box-shadow: 0 -6px 20px rgba(15, 23, 42, 0.08);
+                z-index: 60;
+            }
+        }
     </style>
 </head>
 <body>
@@ -174,7 +192,7 @@
             </div>
 
             <!-- Wizard card -->
-            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-5 sm:p-8">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-5 sm:p-8 wizard-card">
                 <!-- STEP 1: Business Name -->
                 <div class="wizard-step" data-step="1">
                     <div class="flex items-center gap-3 mb-6">
@@ -303,8 +321,8 @@
                     <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> By submitting, you agree to be contacted by Eventry ops for verification.</p>
                 </div>
 
-                <!-- Nav buttons -->
-                <div class="flex items-center justify-between gap-3 mt-8 pt-5 border-t border-slate-100">
+                <!-- Nav buttons: fixed to the bottom of the screen on mobile (see .wizard-nav-row media query) -->
+                <div class="flex items-center justify-between gap-3 mt-8 pt-5 border-t border-slate-100 wizard-nav-row">
                     <button type="button" id="wBackBtn" class="hidden px-5 py-2.5 btn-outline text-sm">← Back</button>
                     <button type="button" id="wNextBtn" class="btn-primary px-6 py-2.5 text-sm shadow-md ml-auto">Continue →</button>
                 </div>
