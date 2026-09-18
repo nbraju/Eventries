@@ -1,10 +1,22 @@
 {
-  "name": "CloudTentO \u2013 Hyderabad Event Planning & Rental Network",
-  "short_name": "CloudTentO",
-  "start_url": "./index.html",
+  "name": "Eventry Vendor",
+  "short_name": "Eventry Vendor",
+  "description": "List your event service, manage bookings, and track enquiries.",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#f97316",
-  "description": "Plan venues, catering packages and event equipment in one PWA.",
-  "icons": []
+  "background_color": "#f8fafc",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
