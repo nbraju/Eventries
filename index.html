@@ -1,2460 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKZWEG474S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8" />
+    <!-- Mobile-first viewport: pinch-zoom stays available for accessibility,
+         but we no longer force maximum-scale, which was fighting the "app" feel. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Your Business — Eventry Vendor</title>
+    <meta name="description" content="List your tent house, catering, decor, or event service on Eventry — free, no commission on direct enquiries." />
+    <link rel="canonical" href="https://vendor.eventry.online/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="List Your Business — Eventry Vendor" />
+    <meta property="og:description" content="Free vendor listing for event services. Get found, manage bookings, and track money from your phone." />
+    <meta property="og:url" content="https://vendor.eventry.online/" />
+    <meta name="twitter:card" content="summary" />
 
-  gtag('config', 'G-WKZWEG474S');
-</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f97316" />
-  <link rel="manifest" href="manifest.json" />
-  <title>CloudTentO / TentWala — Hyderabad Event Planning & Rental Network</title>
-  <meta name="description" content="Find verified tent houses, shamiana suppliers, chairs, sound systems & more for your event in Hyderabad. Vendor onboarding open now." />
-  <link rel="canonical" href="https://nbraju.github.io/TentHouseS-/" />
+    <!-- This app's own manifest — separate from the public marketplace's,
+         scoped to this subdomain so "Add to Home Screen" installs THIS app. -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#7c3aed" />
 
-  <!-- Open Graph / Social Preview -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="TentWala — Hyderabad's Tent House & Event Rental Network" />
-  <meta property="og:description" content="Find verified tent houses, shamiana suppliers, chairs, sound systems & more for your event in Hyderabad." />
-  <meta property="og:url" content="https://nbraju.github.io/TentHouseS-/" />
-  <meta property="og:site_name" content="TentWala" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TentWala — Hyderabad's Tent House & Event Rental Network" />
-  <meta name="twitter:description" content="Find verified tent houses, shamiana suppliers, chairs, sound systems & more for your event in Hyderabad." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
 
-  <!-- ============================================================ -->
-  <!-- ANALYTICS — replace G-WKZWEG474S with your real GA4 ID.       -->
-  <!-- This is what lets you show investors real visitor/enquiry     -->
-  <!-- numbers instead of just a vendor count.                       -->
-  <!-- ============================================================ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AMMA"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-WKZWEG474S');
-  </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { max-width: 100%; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        html { scroll-behavior: smooth; }
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --primary-light: #ede9fe;
+            --green: #16a34a;
+            --ink: #0f172a;
+        }
+        .font-display { font-family: 'Sora', sans-serif; }
 
-    :root {
-      --saffron: #f97316;
-      --saffron-dark: #ea580c;
-      --saffron-light: #fff7ed;
-      --green: #16a34a;
-      --green-dark: #15803d;
-      --ink: #0f172a;
-      --slate-mid: #475569;
-    }
+        .section-label {
+            font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--primary);
+            background: var(--primary-light); border: 1px solid #c4b5fd;
+            padding: 4px 16px; border-radius: 999px; display: inline-block;
+        }
 
-    .font-display { font-family: 'Sora', sans-serif; }
+        .step-num {
+            width: 40px; height: 40px; background: var(--primary); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 900; font-family: 'Sora', sans-serif; flex-shrink: 0;
+        }
 
-    .launch-banner {
-      background: linear-gradient(90deg, var(--saffron) 0%, #fb923c 50%, var(--saffron) 100%);
-      background-size: 200% 100%;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-    @keyframes shimmer {
-      0%,100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
+        .w-cat-tile {
+            padding: 16px; border-radius: 12px; border: 2px solid #e2e8f0;
+            background: #fff; text-align: center; cursor: pointer;
+            transition: all 0.2s; font-family: inherit; color: #334155;
+            min-height: 44px;
+        }
+        .w-cat-tile:hover { border-color: #c4b5fd; background: #faf5ff; transform: translateY(-2px); }
+        .w-cat-tile.active {
+            border-color: #7c3aed; background: #ede9fe; color: #5b21b6;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.2);
+        }
 
-    .hero-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1c1917 60%, #1e1b0e 100%);
-    }
-    .hero-accent { color: var(--saffron); }
-    .saffron-glow {
-      text-shadow: 0 0 40px rgba(249,115,22,0.4);
-    }
+        .form-input {
+            width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1;
+            border-radius: 12px; font-size: 16px; outline: none;
+            transition: all 0.2s; background: white; min-height: 44px;
+        }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15); }
 
-    .vendor-card { transition: all 0.2s ease; }
-    .vendor-card.hidden-card { display: none; }
+        .btn-primary {
+            background: var(--primary); color: white; font-weight: 700;
+            border-radius: 12px; transition: all 0.2s; min-height: 44px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-primary:active { transform: translateY(0); }
 
-    .badge-live {
-      background: var(--green);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 2px 10px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .badge-live::before {
-      content: '';
-      display: inline-block;
-      width: 6px; height: 6px;
-      background: #fff;
-      border-radius: 50%;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+        .btn-outline {
+            border: 2px solid #cbd5e1; color: #334155; font-weight: 700;
+            border-radius: 12px; min-height: 44px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-outline:hover { border-color: #a78bfa; color: #5b21b6; }
 
-    .badge-new {
-      background: #fef3c7;
-      color: #92400e;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
+        /* Popup modal */
+        .popup-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+            z-index: 1100; display: none; align-items: center; justify-content: center;
+            padding: 20px; backdrop-filter: blur(3px);
+        }
+        .popup-overlay.open { display: flex; }
+        .popup-box {
+            background: white; border-radius: 24px; max-width: 420px; width: 100%;
+            padding: 32px 28px 28px; text-align: center;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+            animation: popIn 0.3s ease;
+        }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .popup-box .icon-circle {
+            width: 64px; height: 64px; background: #dcfce7; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 30px; color: #16a34a;
+        }
+        .popup-box h3 { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+        .popup-box p { color: #475569; font-size: 15px; line-height: 1.5; margin-bottom: 20px; }
+        .popup-box .popup-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 12px 32px; border-radius: 999px; font-weight: 700;
+            font-size: 15px; cursor: pointer; transition: 0.2s; min-height: 44px;
+        }
+        .popup-box .popup-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
 
-    .inv-tag {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #334155;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-weight: 500;
-      display: inline-block;
-    }
+        /* Toast */
+        #toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--ink); color: white; padding: 14px 20px; border-radius: 14px;
+            font-size: 14px; font-weight: 500; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 9999; opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex; align-items: center; gap: 10px; max-width: 90vw;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-    .loc-bar {
-      background: #fff7ed;
-      border-bottom: 1px solid #fed7aa;
-    }
-
-    .toggle-btn {
-      background: #fff7ed;
-      color: var(--saffron-dark);
-      padding: 4px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1px solid #fdba74;
-      transition: all 0.2s;
-    }
-    .toggle-btn.active {
-      background: var(--saffron);
-      color: white;
-      border-color: var(--saffron);
-    }
-    .toggle-btn:hover { opacity: 0.85; }
-
-    .search-box {
-      border-radius: 999px;
-      padding: 7px 16px;
-      border: 1px solid #cbd5e1;
-      font-size: 13px;
-      width: 100%;
-      max-width: 260px;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .search-box:focus {
-      border-color: var(--saffron);
-      box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 10px 16px;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      font-size: 14px;
-      outline: none;
-      transition: all 0.2s;
-      background: white;
-    }
-    .form-input:focus {
-      border-color: var(--saffron);
-      box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
-    }
-
-    .btn-saffron {
-      background: var(--saffron);
-      color: white;
-      font-weight: 700;
-      border-radius: 12px;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-saffron:hover { background: var(--saffron-dark); transform: translateY(-1px); }
-
-    .btn-green {
-      background: var(--green);
-      color: white;
-      font-weight: 700;
-      border-radius: 12px;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-green:hover { background: var(--green-dark); transform: translateY(-1px); }
-
-    .step-num {
-      width: 40px; height: 40px;
-      background: var(--saffron);
-      color: white;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 900;
-      font-family: 'Sora', sans-serif;
-      flex-shrink: 0;
-    }
-
-    .btn-wa {
-      background: #25d366;
-      color: white;
-      font-weight: 700;
-      border-radius: 14px;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .btn-wa:hover { background: #20bd5c; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,211,102,0.4); }
-
-    #toast {
-      position: fixed; bottom: 24px; right: 24px;
-      background: var(--ink); color: white;
-      padding: 14px 20px; border-radius: 14px;
-      font-size: 14px; font-weight: 500;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      z-index: 9999;
-      transform: translateY(100px); opacity: 0;
-      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      display: flex; align-items: center; gap: 10px;
-      max-width: 320px;
-    }
-    #toast.show { transform: translateY(0); opacity: 1; }
-
-    .nav-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
-
-    .section-label {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--saffron);
-      background: var(--saffron-light); border: 1px solid #fed7aa;
-      padding: 4px 16px; border-radius: 999px; display: inline-block;
-    }
-
-    /* ---- NEW STYLES FOR VENDOR DETAIL MODAL, CHAT, SOPs ---- */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      backdrop-filter: blur(4px);
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-content {
-      background: white;
-      border-radius: 24px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 24px 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      position: relative;
-    }
-    .modal-close {
-      position: sticky; top: 0; float: right;
-      font-size: 28px; cursor: pointer; color: #94a3b8;
-      background: white; padding: 0 8px; z-index: 10;
-      transition: color 0.2s;
-    }
-    .modal-close:hover { color: #1e293b; }
-
-    .vendor-tab-btn {
-      cursor: pointer;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.2s;
-      border: 1px solid transparent;
-      background: #f1f5f9;
-      color: #475569;
-    }
-    .vendor-tab-btn.active {
-      background: var(--saffron);
-      color: white;
-      border-color: var(--saffron);
-    }
-    .vendor-tab-btn:hover:not(.active) { background: #e2e8f0; }
-    .vendor-tab-content { display: none; }
-    .vendor-tab-content.active { display: block; }
-
-    .inventory-card {
-      transition: all 0.2s ease;
-    }
-    .inventory-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-
-    .availability-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .availability-badge.available { background: #d1fae5; color: #065f46; }
-    .availability-badge.unavailable { background: #fee2e2; color: #991b1b; }
-    .availability-badge.limited { background: #fef3c7; color: #92400e; }
-
-    .chat-widget {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 360px;
-      max-height: 500px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-      display: none;
-      flex-direction: column;
-      z-index: 999;
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
-    }
-    .chat-widget.open { display: flex; }
-    .chat-header {
-      background: var(--saffron);
-      color: white;
-      padding: 12px 16px;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .chat-messages {
-      flex: 1;
-      padding: 12px 16px;
-      overflow-y: auto;
-      max-height: 300px;
-      background: #f1f5f9;
-    }
-    .chat-message {
-      margin-bottom: 8px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      max-width: 85%;
-    }
-    .chat-message.user {
-      background: var(--saffron);
-      color: white;
-      margin-left: auto;
-    }
-    .chat-message.bot {
-      background: white;
-      color: #1e293b;
-      border: 1px solid #e2e8f0;
-    }
-    .chat-input-area {
-      padding: 12px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      gap: 8px;
-      background: white;
-    }
-    .chat-input-area input {
-      flex: 1;
-      padding: 8px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      outline: none;
-      font-size: 14px;
-    }
-    .chat-input-area input:focus { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
-    .chat-toggle {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--saffron);
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(249,115,22,0.3);
-      z-index: 998;
-      border: none;
-      font-size: 24px;
-      transition: all 0.3s;
-    }
-    .chat-toggle:hover { transform: scale(1.05); background: var(--saffron-dark); }
-
-    .sop-tab {
-      background: #f1f5f9;
-      color: #1e293b;
-      padding: 8px 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s;
-      display: inline-block;
-    }
-    .sop-tab.active {
-      background: var(--saffron);
-      color: white;
-      border-color: var(--saffron);
-    }
-    .sop-tab:hover:not(.active) { background: #e2e8f0; }
-    .sop-content { display: none; }
-    .sop-content.active { display: block; }
-    .sop-content h3 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-    .sop-content h4 { font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-top: 1.25rem; margin-bottom: 0.5rem; }
-    .sop-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
-    .sop-content ul li { margin-bottom: 0.25rem; }
-    .sop-content p { margin-bottom: 0.75rem; }
-
-    .fc-daygrid-day { cursor: pointer; }
-    .fc-daygrid-day.fc-day-today { background: #eff6ff !important; }
-    .fc-daygrid-day.has-booking { background: #fef3c7 !important; }
-    .fc-daygrid-day.full-booking { background: #fee2e2 !important; }
-    .suggestion-item {
-      background: #f1f5f9;
-      border-radius: 8px;
-      padding: 6px 12px;
-      display: inline-block;
-      margin: 4px;
-      font-size: 13px;
-    }
-
-    /* ---- PROMINENT NAVIGATION ---- */
-    nav a.nav-link {
-      font-weight: 600;
-      padding: 0.5rem 1.2rem;
-      border-radius: 9999px;
-      background: transparent;
-      color: #475569;
-      transition: all 0.2s;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    nav a.nav-link:hover {
-      background: #f1f5f9;
-      color: var(--saffron);
-    }
-    nav a.nav-link.active {
-      background: var(--saffron);
-      color: white;
-    }
-    nav a.nav-link i { margin-right: 0.4rem; }
-
-    /* ---- INVENTORY GUIDE STYLES (scoped) ---- */
-    .inventory-guide-section {
-      background: #f8fafc;
-    }
-    .inventory-guide-section .ig-card {
-      background: white;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
-    }
-    .inventory-guide-section .ig-calc-row {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-    .inventory-guide-section .ig-calc-row label {
-      font-weight: 600;
-      min-width: 120px;
-    }
-    .inventory-guide-section .ig-calc-row input[type="range"] {
-      flex: 1;
-      min-width: 200px;
-    }
-    .inventory-guide-section .ig-calc-row .ig-value {
-      font-weight: 700;
-      color: var(--saffron);
-      font-size: 1.2rem;
-      min-width: 60px;
-      text-align: right;
-    }
-    .inventory-guide-section .ig-results {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .inventory-guide-section .ig-result-item {
-      background: #f0fdfa;
-      border-radius: 12px;
-      padding: 1rem;
-      text-align: center;
-      border: 1px solid #ccfbf1;
-    }
-    .inventory-guide-section .ig-result-item .ig-label {
-      font-size: 0.75rem;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .inventory-guide-section .ig-result-item .ig-val {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--saffron);
-      margin-top: 0.25rem;
-    }
-    .inventory-guide-section .ig-result-item .ig-unit {
-      font-size: 0.75rem;
-      color: #64748b;
-    }
-
-    .inventory-guide-section .ig-event-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.5rem;
-    }
-    .inventory-guide-section .ig-event-header {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .inventory-guide-section .ig-event-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin: 0;
-    }
-    .inventory-guide-section .ig-event-header .ig-guest-badge {
-      background: var(--saffron);
-      color: white;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    .inventory-guide-section .ig-inv-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .inventory-guide-section .ig-inv-list li {
-      padding: 0.7rem 1.5rem;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-    .inventory-guide-section .ig-inv-list li:last-child { border-bottom: none; }
-    .inventory-guide-section .ig-inv-list .ig-item-name {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .inventory-guide-section .ig-inv-list .ig-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-    .ig-dot-essential { background: #ef4444; }
-    .ig-dot-recommended { background: #f59e0b; }
-    .ig-dot-optional { background: #10b981; }
-    .inventory-guide-section .ig-inv-list .ig-qty {
-      font-weight: 700;
-      color: var(--saffron);
-      background: #f0fdfa;
-      padding: 0.2rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-    }
-
-    .inventory-guide-section .ig-tips-box {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      border: 1px solid #fde68a;
-      border-radius: 16px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
-    }
-    .inventory-guide-section .ig-tips-box h4 {
-      color: #92400e;
-      font-size: 1rem;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .inventory-guide-section .ig-tips-box ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .inventory-guide-section .ig-tips-box li {
-      padding: 0.4rem 0;
-      font-size: 0.9rem;
-      color: #78350f;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-    .inventory-guide-section .ig-tips-box li::before {
-      content: '💡';
-    }
-
-    .inventory-guide-section .ig-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 2rem;
-      font-size: 0.9rem;
-    }
-    .inventory-guide-section .ig-table th {
-      background: var(--saffron);
-      color: white;
-      padding: 0.9rem 1rem;
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .inventory-guide-section .ig-table td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .inventory-guide-section .ig-table tr:hover { background: #f8fafc; }
-    .inventory-guide-section .ig-table .ig-category {
-      background: #f1f5f9;
-      font-weight: 700;
-      color: var(--saffron);
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.5px;
-    }
-    .inventory-guide-section .ig-table .ig-highlight td {
-      background: #fffbeb;
-    }
-
-    .inventory-guide-section .ig-footer-cta {
-      background: linear-gradient(135deg, var(--saffron) 0%, #ea580c 100%);
-      color: white;
-      padding: 3rem 2rem;
-      border-radius: 20px;
-      text-align: center;
-      margin-top: 3rem;
-    }
-    .inventory-guide-section .ig-footer-cta h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .inventory-guide-section .ig-footer-cta p {
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-    }
-    .inventory-guide-section .ig-footer-cta .btn-ig {
-      display: inline-block;
-      background: white;
-      color: var(--saffron);
-      padding: 0.85rem 2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: transform 0.2s;
-    }
-    .inventory-guide-section .ig-footer-cta .btn-ig:hover {
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 640px) {
-      .chat-widget { width: 90%; right: 5%; bottom: 10px; }
-      .modal-content { padding: 16px; margin: 10px; }
-      .vendor-tab-btn { font-size: 12px; padding: 6px 12px; }
-      .inventory-guide-section .ig-event-grid { grid-template-columns: 1fr; }
-      .inventory-guide-section .ig-calc-row { flex-direction: column; align-items: stretch; }
-      .inventory-guide-section .ig-calc-row .ig-value { text-align: left; }
-      nav a.nav-link { font-size: 0.75rem; padding: 0.3rem 0.8rem; }
-    }
-  
-/* CloudTentO Event Planner extension */
-.event-planner-section{background:linear-gradient(180deg,#fff7ed 0%,#fff 65%)}
-.event-planner-shell{background:#fff;border:1px solid #fed7aa;border-radius:24px;box-shadow:0 18px 50px rgba(15,23,42,.08);overflow:hidden}
-.ep-head{background:linear-gradient(135deg,#0f172a,#1c1917);color:#fff;padding:28px}.ep-head h2{font-family:'Sora',sans-serif}
-.ep-stepbar{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;border-bottom:1px solid #e2e8f0}
-.ep-step{white-space:nowrap;padding:7px 12px;border-radius:999px;background:#f1f5f9;color:#64748b;font-size:12px;font-weight:800}.ep-step.active{background:var(--saffron);color:#fff}
-.ep-panel{display:none;padding:24px}.ep-panel.active{display:block}
-.ep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.ep-card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;overflow:hidden;transition:.2s}.ep-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(15,23,42,.09);border-color:#fdba74}
-.ep-card-media{height:150px;background:linear-gradient(135deg,#fed7aa,#ffedd5);display:flex;align-items:center;justify-content:center;font-size:52px}.ep-card-body{padding:16px}
-.ep-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;background:#f8fafc;border:1px solid #e2e8f0;color:#475569;font-size:11px;font-weight:700}
-.ep-price{font-size:20px;font-weight:900;color:#0f172a}.ep-muted{font-size:12px;color:#64748b}
-.ep-btn{border:0;border-radius:11px;padding:9px 13px;font-size:12px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-.ep-btn-primary{background:var(--saffron);color:#fff}.ep-btn-primary:hover{background:var(--saffron-dark)}.ep-btn-secondary{background:#f1f5f9;color:#334155}
-.ep-filterbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:12px;margin-bottom:18px}
-.ep-summary{background:#0f172a;color:#fff;border-radius:18px;padding:18px;position:sticky;bottom:12px;z-index:20;box-shadow:0 14px 40px rgba(15,23,42,.25)}
-.ep-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;align-items:center}.ep-summary-value{font-size:21px;font-weight:900}
-.ep-empty{text-align:center;padding:35px;color:#64748b;background:#f8fafc;border-radius:16px}.ep-package{border:2px solid #e2e8f0;border-radius:16px;padding:16px;cursor:pointer;transition:.2s;background:#fff}.ep-package:hover{border-color:#fdba74}.ep-package.selected{border-color:var(--saffron);background:#fff7ed}
-.ep-package-tag{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#c2410c}.ep-check{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#475569;margin:5px 0}.ep-check i{color:#16a34a;margin-top:2px}
-.ep-selected-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #e2e8f0}.ep-badge{padding:3px 8px;border-radius:999px;font-size:10px;font-weight:800}.ep-badge-selected{background:#dcfce7;color:#166534}.ep-badge-pending{background:#fef3c7;color:#92400e}
-.ep-modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:3000;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(5px)}.ep-modal-overlay.open{display:flex}.ep-modal{width:min(920px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.3)}
-.ep-modal-head{padding:20px 24px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;background:#fff;z-index:2}.ep-modal-body{padding:24px}.ep-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
-.ep-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);opacity:0;z-index:5000;background:#0f172a;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 12px 35px rgba(0,0,0,.25);transition:.35s;font-size:13px}.ep-toast.show{transform:translate(-50%,0);opacity:1}
-@media(max-width:640px){.ep-head{padding:20px}.ep-panel{padding:16px}.ep-summary{bottom:5px}.ep-summary-grid{grid-template-columns:1fr 1fr}}
-
-</style>
+        header.vendor-header {
+            background: white; border-bottom: 1px solid #e2e8f0;
+            position: sticky; top: 0; z-index: 50;
+        }
+    </style>
 </head>
 <body>
 
-<!-- ===== TOAST ===== -->
-<div id="toast"><i class="fa-solid fa-circle-check text-green-400"></i><span id="toastMsg">Done!</span></div>
+    <!-- ===== TOAST ===== -->
+    <div id="toast"><i class="fa-solid fa-circle-check text-green-400"></i><span id="toastMsg">Done!</span></div>
 
-<!-- ===== LAUNCH BANNER ===== -->
-<div class="launch-banner text-white text-center py-2 px-4 text-xs sm:text-sm font-bold flex items-center justify-center gap-2">
-  <i class="fa-solid fa-star animate-spin" style="animation-duration:3s"></i>
-  <span>🚀 TentWala is LIVE — Hyderabad's first geo-fenced tent house network. Vendor onboarding is FREE & instant.</span>
-  <i class="fa-solid fa-star animate-spin" style="animation-duration:3s"></i>
-</div>
+    <!-- ===== POPUP (Listing submitted) ===== -->
+    <div class="popup-overlay" id="listSubmittedPopup">
+        <div class="popup-box">
+            <div class="icon-circle"><i class="fa-regular fa-circle-check"></i></div>
+            <h3>Thanks for Listing!</h3>
+            <p>It is sent for review and approval. It will be listed and notified by WhatsApp/call after approval.</p>
+            <div id="listSubmittedUidBox" class="hidden text-left bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 text-xs text-slate-600 space-y-1.5"></div>
+            <button class="popup-btn" onclick="closeListSubmittedPopup()">Got it</button>
+        </div>
+    </div>
 
-<!-- ===== NAVIGATION ===== -->
-<nav id="mainNav" class="bg-white sticky top-0 z-50 border-b border-slate-200/80 transition-shadow">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center gap-2">
-        <span class="font-display text-2xl font-extrabold tracking-tight text-slate-900">
-          <span style="color:var(--saffron)">Tent</span><span>Wala</span>
-        </span>
-        <span class="hidden sm:inline-block text-[9px] font-black uppercase tracking-widest text-orange-600 bg-orange-100 px-2 py-0.5 rounded border border-orange-200">Hyderabad</span>
-      </div>
-      <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto">
-        <a href="#marketplace" class="nav-link"><i class="fa-solid fa-store"></i> Browse</a>
-        <a href="#event-planner" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Plan Event</a>
-        <a href="#onboard" class="nav-link"><i class="fa-solid fa-plus-circle"></i> List</a>
-        <a href="#packages" class="nav-link"><i class="fa-solid fa-box"></i> Packages</a>
-        <a href="#sops" class="nav-link"><i class="fa-solid fa-clipboard-list"></i> SOPs</a>
-        <a href="#inventory-guide" class="nav-link active"><i class="fa-solid fa-cubes"></i> Inventory</a>
-        <a href="#enquiry" class="nav-link"><i class="fa-solid fa-search"></i> Enquire</a>
-        <a href="#onboard" class="btn-saffron text-xs sm:text-sm px-4 py-2 shadow-md ml-1 flex-shrink-0">
-          <i class="fa-solid fa-store"></i> <span>List Free</span>
+    <!-- ===== HEADER ===== -->
+    <header class="vendor-header px-4 py-3 flex items-center justify-between">
+        <a href="https://eventry.online" class="font-display font-extrabold text-lg text-slate-900">Eventry <span style="color:var(--primary)">Vendor</span></a>
+        <a href="https://nbraju.github.io/TentDesk/" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-purple-600">
+            Already listed? Open dashboard →
         </a>
-      </div>
-    </div>
-  </div>
-</nav>
+    </header>
 
-<!-- ===== LOCATION BAR ===== -->
-<div class="loc-bar py-2 px-4 text-sm flex flex-wrap items-center justify-between gap-2">
-  <div class="flex items-center gap-2 text-orange-800 font-medium">
-    <i class="fa-solid fa-location-dot text-orange-500"></i>
-    <span id="locationStatus" class="text-sm">Detecting your area...</span>
-  </div>
-  <div class="flex items-center gap-2">
-    <span class="text-xs text-slate-500 hidden sm:inline">Show:</span>
-    <button id="localToggle" class="toggle-btn" data-mode="local">📍 Nearby</button>
-    <button id="allToggle" class="toggle-btn active" data-mode="all">🌐 All Hyderabad</button>
-    <input type="text" id="searchInput" placeholder="Search area, items..." class="search-box hidden sm:inline-block" />
-  </div>
-</div>
-
-<!-- ===== HERO ===== -->
-<section class="hero-bg text-white py-16 sm:py-24 px-4">
-  <div class="max-w-6xl mx-auto text-center">
-    <div class="inline-block bg-orange-500/10 text-orange-300 text-[11px] font-bold tracking-widest uppercase px-5 py-1.5 rounded-full border border-orange-500/20 mb-6">
-      <i class="fa-solid fa-location-dot mr-1.5"></i> Hyderabad · Rangareddy · Medchal
-    </div>
-    <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-      Shamiana. Chairs. Sound.<br/>
-      <span class="hero-accent saffron-glow">All in One Place.</span>
-    </h1>
-    <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mt-6 leading-relaxed">
-      TentWala connects <strong class="text-white">local tent house owners</strong> with people planning weddings, functions & corporate events — right in their neighbourhood.
-    </p>
-    <div class="flex flex-wrap justify-center gap-4 mt-8">
-      <a href="#onboard" class="btn-saffron px-8 py-3.5 text-base shadow-xl">
-        <i class="fa-solid fa-store"></i> Register Your Inventory — Free
-      </a>
-      <a href="#enquiry" class="inline-flex items-center gap-2 px-8 py-3.5 text-base font-semibold rounded-xl border border-slate-500 hover:border-white text-white transition">
-        <i class="fa-solid fa-binoculars"></i> Find Rentals Near Me
-      </a>
-    </div>
-    <div class="flex flex-wrap justify-center gap-8 sm:gap-16 mt-12 text-sm text-slate-400">
-      <div class="text-center">
-        <div class="font-display text-3xl font-extrabold text-white" id="liveCount">0</div>
-        <div class="mt-1">Live Vendors</div>
-      </div>
-      <div class="text-center">
-        <div class="font-display text-3xl font-extrabold text-white">12+</div>
-        <div class="mt-1">Item Categories</div>
-      </div>
-      <div class="text-center">
-        <div class="font-display text-3xl font-extrabold text-white">0%</div>
-        <div class="mt-1">Commission*</div>
-      </div>
-      <div class="text-center">
-        <div class="font-display text-3xl font-extrabold text-white">15 min</div>
-        <div class="mt-1">Enquiry Response</div>
-      </div>
-    </div>
-    <p class="text-[10px] text-slate-600 mt-3">*Direct call enquiries — no commission. Platform fee applies for managed bookings.</p>
-  </div>
-</section>
-
-
-<section id="event-planner" class="event-planner-section py-16 border-t border-orange-100 scroll-mt-20">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center max-w-3xl mx-auto mb-10"><span class="section-label">New · Event Planning</span>
-<h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 mt-3">Plan Your Complete Event</h2>
-<p class="mt-3 text-slate-500">Choose a venue, compare catering, use venue combo packages, and build your event plan.</p></div>
-<div class="event-planner-shell">
-<div class="ep-head"><div class="flex flex-wrap items-center justify-between gap-4">
-<div><div class="text-orange-300 text-xs font-black uppercase tracking-widest">CloudTentO Event Planner</div>
-<h2 class="text-2xl sm:text-3xl font-extrabold mt-2">One event. One plan. One enquiry.</h2>
-<p class="text-slate-300 text-sm mt-2 max-w-2xl">Start with date, location and guest count. Select a venue, then use its catering package or choose an independent caterer.</p></div>
-<button onclick="openEventSetup()" class="ep-btn ep-btn-primary px-5 py-3"><i class="fa-solid fa-wand-magic-sparkles"></i> Start Event Plan</button>
-</div></div>
-<div class="ep-stepbar"><span class="ep-step active" id="epStep1">1 Event</span><span class="ep-step" id="epStep2">2 Venue</span><span class="ep-step" id="epStep3">3 Catering</span><span class="ep-step" id="epStep4">4 My Event</span><span class="ep-step" id="epStep5">5 Enquiry</span></div>
-
-<div id="epSetupPanel" class="ep-panel active">
-<h3 class="text-xl font-bold text-slate-900">Tell us about your event</h3><p class="text-sm text-slate-500 mb-5">This drives capacity, package and catering recommendations.</p>
-<div class="ep-form-grid">
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Event Type</label><select id="epEventType" class="form-input"><option>Wedding</option><option>Reception</option><option>Engagement</option><option>Birthday</option><option>Corporate</option><option>Conference</option><option>Religious</option><option>Festival</option><option>Party</option><option>Other</option></select></div>
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Event Date</label><input id="epEventDate" type="date" class="form-input"></div>
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Guests</label><input id="epGuests" type="number" min="10" step="10" value="200" class="form-input"></div>
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Budget (₹)</label><input id="epBudget" type="number" min="0" step="5000" value="500000" class="form-input"></div>
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Event Location / Locality</label><input id="epLocation" placeholder="e.g. Kukatpally, Gachibowli, LB Nagar" class="form-input"></div>
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Food Preference</label><select id="epFood" class="form-input"><option>Veg + Non-Veg</option><option>Pure Vegetarian</option><option>Vegetarian</option><option>Non-Vegetarian</option><option>Jain</option></select></div>
-<div><label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Venue Type</label><select id="epVenueType" class="form-input"><option>Any</option><option>Function Hall</option><option>Convention Centre</option><option>Banquet Hall</option><option>Hotel</option><option>Resort</option><option>Outdoor</option></select></div>
-</div>
-<div class="flex justify-end gap-2 mt-6"><button onclick="loadSavedEvent()" class="ep-btn ep-btn-secondary">Restore Saved Plan</button><button onclick="startEventPlan()" class="ep-btn ep-btn-primary px-5">Find Venues <i class="fa-solid fa-arrow-right"></i></button></div>
-</div>
-
-<div id="epVenuePanel" class="ep-panel">
-<div class="flex flex-wrap justify-between gap-3 mb-5"><div><h3 class="text-xl font-bold">Select a Venue</h3><p id="epVenueContext" class="text-sm text-slate-500"></p></div><button onclick="openEventSetup()" class="ep-btn ep-btn-secondary">Change Event</button></div>
-<div class="ep-filterbar"><input id="epVenueSearch" oninput="renderVenues()" class="form-input" placeholder="Search venue or locality..."><select id="epVenueCapacity" onchange="renderVenues()" class="form-input"><option value="0">Any capacity</option><option value="100">100+</option><option value="250">250+</option><option value="500">500+</option><option value="1000">1000+</option></select><select id="epVenuePackageFilter" onchange="renderVenues()" class="form-input"><option value="all">All packages</option><option value="combo">Venue + Catering</option><option value="venue">Venue Only</option></select></div>
-<div id="epVenueGrid" class="ep-grid"></div>
-<div class="ep-summary mt-5"><div class="ep-summary-grid"><div><div class="text-xs text-slate-400">Event</div><div id="epSumEvent" class="font-bold">—</div></div><div><div class="text-xs text-slate-400">Guests</div><div id="epSumGuests" class="ep-summary-value">—</div></div><div><div class="text-xs text-slate-400">Selected</div><div id="epSumVenue" class="font-bold">None</div></div><button onclick="goToCatering()" class="ep-btn ep-btn-primary">Continue <i class="fa-solid fa-arrow-right"></i></button></div></div>
-</div>
-
-<div id="epCateringPanel" class="ep-panel">
-<div class="flex flex-wrap justify-between gap-3 mb-5"><div><h3 class="text-xl font-bold">Catering & Venue Packages</h3><p class="text-sm text-slate-500">Keep a venue's combo or replace it with an independent caterer.</p></div><button onclick="showEventPanel('epVenuePanel',2)" class="ep-btn ep-btn-secondary">Back to Venues</button></div>
-<div id="epComboArea"></div>
-<div class="mt-7"><div class="flex justify-between gap-3 mb-3"><div><h4 class="font-bold">Independent Caterers</h4><p class="text-xs text-slate-500">Use this when you don't want the venue's catering package.</p></div><button onclick="chooseIndependentCatering()" class="ep-btn ep-btn-secondary">Choose Independent Caterer</button></div>
-<div class="ep-filterbar"><input id="epCaterSearch" oninput="renderCaterers()" class="form-input" placeholder="Search caterer, cuisine or locality..."><select id="epCuisine" onchange="renderCaterers()" class="form-input"><option value="all">All cuisines</option><option>Andhra</option><option>Telangana</option><option>South Indian</option><option>North Indian</option><option>Odia</option><option>Multi-Cuisine</option></select><select id="epFoodFilter" onchange="renderCaterers()" class="form-input"><option value="all">Any food type</option><option>Pure Vegetarian</option><option>Veg + Non-Veg</option><option>Non-Vegetarian</option></select></div>
-<div id="epCatererGrid" class="ep-grid"></div></div>
-<div class="ep-summary mt-5"><div class="ep-summary-grid"><div><div class="text-xs text-slate-400">Venue</div><div id="epSumVenue2" class="font-bold">None</div></div><div><div class="text-xs text-slate-400">Catering</div><div id="epSumCaterer" class="font-bold">None</div></div><div><div class="text-xs text-slate-400">Estimated total</div><div id="epSumTotal" class="ep-summary-value">₹0</div></div><button onclick="openMyEvent()" class="ep-btn ep-btn-primary">Review My Event <i class="fa-solid fa-arrow-right"></i></button></div></div>
-</div>
-
-<div id="epMyEventPanel" class="ep-panel">
-<div class="flex flex-wrap justify-between gap-3 mb-5"><div><h3 class="text-xl font-bold">My Event</h3><p class="text-sm text-slate-500">Your venue, package and catering are collected here.</p></div><button onclick="openEventSetup()" class="ep-btn ep-btn-secondary">Edit Event</button></div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-5"><div class="lg:col-span-2 bg-white border border-slate-200 rounded-2xl overflow-hidden"><div class="p-5 border-b border-slate-200 flex justify-between gap-3"><div><h4 id="epMyEventName" class="font-bold">My Event</h4><p id="epMyEventMeta" class="text-xs text-slate-500 mt-1"></p></div><span id="epEventId" class="ep-pill">CT-EVT-—</span></div><div id="epSelections"></div><div class="p-4 bg-slate-50 text-xs text-slate-500">Final availability and price require provider confirmation.</div></div>
-<div class="bg-slate-900 text-white rounded-2xl p-5"><div class="text-xs text-slate-400 uppercase font-bold">Budget</div><div id="epBudgetValue" class="text-3xl font-black mt-2">₹0</div><div class="mt-4 text-sm text-slate-300">Selected / estimated</div><div class="h-2 rounded-full bg-slate-700 mt-2 overflow-hidden"><div id="epBudgetFill" class="h-full bg-orange-500" style="width:0%"></div></div><div class="flex justify-between mt-2 text-xs"><span id="epBudgetSpent">₹0</span><span id="epBudgetRemaining">₹0 remaining</span></div><button onclick="requestCompleteQuote()" class="ep-btn ep-btn-primary w-full mt-5 py-3">Request Complete Event Quote</button><button onclick="saveEventPlan()" class="ep-btn ep-btn-secondary w-full mt-2">Save Event Plan</button></div></div>
-</div>
-
-<div id="epEnquiryPanel" class="ep-panel"><div class="max-w-2xl mx-auto text-center"><div class="text-5xl">🎉</div><h3 class="text-2xl font-bold mt-4">Your event enquiry is ready</h3><p class="text-sm text-slate-500 mt-2">Providers confirm availability, inclusions and final price.</p><div id="epEnquiryPreview" class="text-left bg-slate-50 border border-slate-200 rounded-2xl p-5 mt-6 text-sm"></div><button onclick="sendCompleteEventWhatsApp()" class="btn-wa w-full py-3.5 mt-5 rounded-xl"><i class="fa-brands fa-whatsapp text-xl"></i> Send via WhatsApp</button></div></div>
-</div></div>
-</section>
-<div id="epModal" class="ep-modal-overlay" onclick="if(event.target===this)closeEPModal()"><div class="ep-modal"><div class="ep-modal-head"><div><div id="epModalKicker" class="text-xs font-black uppercase tracking-widest text-orange-600"></div><h3 id="epModalTitle" class="text-xl font-bold mt-1"></h3></div><button onclick="closeEPModal()" class="text-2xl text-slate-400">&times;</button></div><div id="epModalBody" class="ep-modal-body"></div></div></div><div id="epToast" class="ep-toast"></div>
-
-<!-- ===== HOW IT WORKS (2 paths) ===== -->
-<section class="py-14 bg-white border-b border-slate-100">
-  <div class="max-w-5xl mx-auto px-4">
-    <div class="text-center mb-10">
-      <span class="section-label">How TentWala Works</span>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Vendor path -->
-      <div class="bg-orange-50 rounded-2xl p-7 border border-orange-100">
-        <div class="text-orange-600 font-bold text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-store"></i> For Tent House Owners
-        </div>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3">
-            <div class="step-num text-sm">1</div>
-            <div>
-              <p class="font-semibold text-slate-800">Fill the onboarding form below</p>
-              <p class="text-xs text-slate-500 mt-0.5">Your area, locality, items & phone. Takes 90 seconds.</p>
+    <!-- ===== TAB: LIST (Vendor Onboarding Wizard) ===== -->
+    <section class="py-8 sm:py-10">
+        <div class="max-w-2xl mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="section-label">Free Vendor Listing</span>
+                <h1 class="font-display text-2xl sm:text-4xl font-bold text-slate-900 mt-3">Get Listed in 7 Quick Steps</h1>
+                <p class="text-slate-500 mt-2">No app to download. No commission on direct enquiries. Fill this once and we'll verify within an hour.</p>
             </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="step-num text-sm">2</div>
-            <div>
-              <p class="font-semibold text-slate-800">Your details reach us on WhatsApp</p>
-              <p class="text-xs text-slate-500 mt-0.5">We verify & publish your node to the live grid.</p>
+
+            <!-- Progress bar -->
+            <div class="flex items-center gap-1.5 mb-8" id="wizardProgress">
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+                <div class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
             </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="step-num text-sm">3</div>
-            <div>
-              <p class="font-semibold text-slate-800">Customers call you directly</p>
-              <p class="text-xs text-slate-500 mt-0.5">Your phone number is displayed. No middleman on direct calls.</p>
+
+            <!-- Wizard card -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-5 sm:p-8">
+                <!-- STEP 1: Business Name -->
+                <div class="wizard-step" data-step="1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">1</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">What's your business name?</h2>
+                            <p class="text-sm text-slate-500">This is how customers will find you.</p>
+                        </div>
+                    </div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Business Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="wBizName" placeholder="e.g., Grand Tent House" class="form-input" />
+                </div>
+
+                <!-- STEP 2: WhatsApp Number -->
+                <div class="wizard-step hidden" data-step="2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">2</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">Your WhatsApp number</h2>
+                            <p class="text-sm text-slate-500">Customers will reach you here. Include country code if outside India.</p>
+                        </div>
+                    </div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp Number <span class="text-red-500">*</span></label>
+                    <input type="tel" id="wPhone" placeholder="+91 99887 76655" class="form-input" />
+                </div>
+
+                <!-- STEP 3: Category -->
+                <div class="wizard-step hidden" data-step="3">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">3</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">Pick your main category</h2>
+                            <p class="text-sm text-slate-500">Pick the one that best describes your core service.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <button type="button" class="w-cat-tile" data-cat="Tent House"><div class="text-2xl mb-1">🏕️</div><div class="text-sm font-bold">Tent House</div></button>
+                        <button type="button" class="w-cat-tile" data-cat="Venue"><div class="text-2xl mb-1">🏛️</div><div class="text-sm font-bold">Venue</div></button>
+                        <button type="button" class="w-cat-tile" data-cat="Catering"><div class="text-2xl mb-1">🍽️</div><div class="text-sm font-bold">Catering</div></button>
+                        <button type="button" class="w-cat-tile" data-cat="Lighting"><div class="text-2xl mb-1">💡</div><div class="text-sm font-bold">Lighting</div></button>
+                        <button type="button" class="w-cat-tile" data-cat="Decorations"><div class="text-2xl mb-1">🎨</div><div class="text-sm font-bold">Decorations</div></button>
+                        <button type="button" class="w-cat-tile" data-cat="Others"><div class="text-2xl mb-1">📦</div><div class="text-sm font-bold">Others</div></button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Location -->
+                <div class="wizard-step hidden" data-step="4">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">4</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">Where do you operate?</h2>
+                            <p class="text-sm text-slate-500">City and area help customers find you nearby.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">City <span class="text-red-500">*</span></label>
+                            <input type="text" id="wCity" placeholder="e.g., Hyderabad" class="form-input" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Area / Locality</label>
+                            <input type="text" id="wArea" placeholder="e.g., Banjara Hills" class="form-input" />
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">PIN Code</label>
+                            <input type="text" id="wPin" placeholder="e.g., 500034" class="form-input" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Items / Services -->
+                <div class="wizard-step hidden" data-step="5">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">5</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">What do you rent or provide?</h2>
+                            <p class="text-sm text-slate-500">List your top items or services. Comma-separated is fine.</p>
+                        </div>
+                    </div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Items / Services <span class="text-red-500">*</span></label>
+                    <textarea id="wItems" rows="4" placeholder="e.g., 200 chairs, 20 tables, shamiyana tent, LED lights, stage setup" class="form-input resize-none"></textarea>
+                </div>
+
+                <!-- STEP 6: Description + Photos -->
+                <div class="wizard-step hidden" data-step="6">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">6</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">A short description</h2>
+                            <p class="text-sm text-slate-500">Tell customers why they should pick you.</p>
+                        </div>
+                    </div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Description <span class="text-red-500">*</span></label>
+                    <textarea id="wDescription" rows="3" placeholder="e.g., Family-run tent house since 2005. Specialising in weddings and large outdoor events." class="form-input resize-none"></textarea>
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Photo URL 1</label>
+                            <input type="url" id="wImg1" placeholder="https://…" class="form-input" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Photo URL 2</label>
+                            <input type="url" id="wImg2" placeholder="https://…" class="form-input" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Photo URL 3</label>
+                            <input type="url" id="wImg3" placeholder="https://…" class="form-input" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 7: Review & Submit -->
+                <div class="wizard-step hidden" data-step="7">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="step-num">7</div>
+                        <div>
+                            <h2 class="font-display text-xl font-bold text-slate-900">Ready to submit!</h2>
+                            <p class="text-sm text-slate-500">Review what you're about to send. We'll verify within 1 hour.</p>
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-sm text-slate-700 space-y-1.5">
+                        <p><b>Business:</b> <span id="wReviewBiz">—</span></p>
+                        <p><b>Phone:</b> <span id="wReviewPhone">—</span></p>
+                        <p><b>Category:</b> <span id="wReviewCat">—</span></p>
+                        <p><b>City:</b> <span id="wReviewCity">—</span></p>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4"><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> By submitting, you agree to be contacted by Eventry ops for verification.</p>
+                </div>
+
+                <!-- Nav buttons -->
+                <div class="flex items-center justify-between gap-3 mt-8 pt-5 border-t border-slate-100">
+                    <button type="button" id="wBackBtn" class="hidden px-5 py-2.5 btn-outline text-sm">← Back</button>
+                    <button type="button" id="wNextBtn" class="btn-primary px-6 py-2.5 text-sm shadow-md ml-auto">Continue →</button>
+                </div>
             </div>
-          </div>
-        </div>
-        <a href="#onboard" class="btn-saffron w-full py-3 mt-6 text-sm rounded-xl">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> List My Inventory Free
-        </a>
-      </div>
-      <!-- Customer path -->
-      <div class="bg-emerald-50 rounded-2xl p-7 border border-emerald-100">
-        <div class="text-emerald-700 font-bold text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-users"></i> For Event Planners & Families
-        </div>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3">
-            <div class="step-num text-sm" style="background:var(--green)">1</div>
-            <div>
-              <p class="font-semibold text-slate-800">Browse verified local vendors</p>
-              <p class="text-xs text-slate-500 mt-0.5">Filtered by your area automatically via GPS.</p>
+
+            <!-- WHAT YOU GET -->
+            <div class="mt-10">
+                <div class="text-center mb-6">
+                    <span class="section-label">For Vendors</span>
+                    <h2 class="font-display text-xl sm:text-2xl font-bold text-slate-900 mt-3">More Than a Listing.<br> A Full Business Dashboard.</h2>
+                    <p class="text-slate-500 mt-3 text-sm">Every listed vendor gets a free EventDesk account — manage bookings, inventory, customers, and payments from your phone.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                        <div class="w-11 h-11 bg-purple-100 rounded-xl flex items-center justify-center text-xl mb-3">🔍</div>
+                        <h3 class="font-bold text-slate-900">Get Found</h3>
+                        <p class="text-sm text-slate-600 mt-2">Your listing appears in search results filtered by category and city.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                        <div class="w-11 h-11 bg-emerald-100 rounded-xl flex items-center justify-center text-xl mb-3">📅</div>
+                        <h3 class="font-bold text-slate-900">Manage Bookings</h3>
+                        <p class="text-sm text-slate-600 mt-2">Track every booking, delivery, and return in one place.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+                        <div class="w-11 h-11 bg-amber-100 rounded-xl flex items-center justify-center text-xl mb-3">₹</div>
+                        <h3 class="font-bold text-slate-900">Track Money</h3>
+                        <p class="text-sm text-slate-600 mt-2">Record advances and balances. See exactly who owes you what.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="step-num text-sm" style="background:var(--green)">2</div>
-            <div>
-              <p class="font-semibold text-slate-800">Call directly or send an enquiry</p>
-              <p class="text-xs text-slate-500 mt-0.5">One tap to call the vendor. Or fill a quick form for assisted matching.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="step-num text-sm" style="background:var(--green)">3</div>
-            <div>
-              <p class="font-semibold text-slate-800">Confirm & get it delivered</p>
-              <p class="text-xs text-slate-500 mt-0.5">Vendor handles setup. We handle the coordination on managed orders.</p>
-            </div>
-          </div>
         </div>
-        <a href="#enquiry" class="btn-green w-full py-3 mt-6 text-sm rounded-xl">
-          <i class="fa-solid fa-search"></i> Find Rentals Near Me
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== VENDOR ONBOARDING FORM ===== -->
-<section id="onboard" class="py-16 bg-slate-50 scroll-mt-20">
-  <div class="max-w-4xl mx-auto px-4">
-    <div class="text-center mb-10">
-      <span class="section-label">Vendor Onboarding</span>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 mt-3">Register Your Tent House</h2>
-      <p class="text-slate-500 mt-2 max-w-xl mx-auto">Your listing is submitted directly to our WhatsApp ops line. We publish it to the live directory — usually within 1 hour.</p>
-    </div>
-
-    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-10 max-w-2xl mx-auto">
-      <form id="vendorForm" class="space-y-5" onsubmit="submitVendorForm(event)">
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Business / Shop Name <span class="text-red-500">*</span></label>
-          <input type="text" id="vBizName" required placeholder="e.g., Sri Lakshmi Tent House" class="form-input" />
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">City / District <span class="text-red-500">*</span></label>
-            <input type="text" id="vCity" required placeholder="e.g., Rangareddy" class="form-input" />
-            <p class="text-[10px] text-slate-400 mt-1"><i class="fa-solid fa-location-dot text-orange-400"></i> Auto-detected below</p>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Area / Locality <span class="text-red-500">*</span></label>
-            <input type="text" id="vArea" required placeholder="e.g., Beeramguda" class="form-input" />
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">PIN Code <span class="text-red-500">*</span></label>
-            <input type="text" id="vPin" required placeholder="e.g., 502319" maxlength="6" class="form-input" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp / Phone <span class="text-red-500">*</span></label>
-            <input type="tel" id="vPhone" required placeholder="+91 98xxxxxxxx" class="form-input" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Items & Quantity Available <span class="text-red-500">*</span></label>
-          <textarea id="vItems" required rows="3" placeholder="e.g., Iron Frame Shamianas - 4, Plastic Chairs - 500, Pedestal Fans - 12, Sound System - 1 Set" class="form-input resize-none"></textarea>
-          <p class="text-[10px] text-slate-400 mt-1">Comma-separated. Be specific — better listings get more calls.</p>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Any Additional Info <span class="text-slate-400 font-normal normal-case">(optional)</span></label>
-          <input type="text" id="vExtra" placeholder="e.g., Delivery available, Min booking 2 days, Operating since 2005" class="form-input" />
-        </div>
-
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Google Drive Folder Link <span class="text-slate-400 font-normal normal-case">(optional — for inventory photos)</span></label>
-          <input type="url" id="vDriveFolder" placeholder="https://drive.google.com/drive/folders/..." class="form-input" />
-          <p class="text-[10px] text-slate-400 mt-1"><i class="fa-brands fa-google-drive text-blue-500"></i> Make the folder "Anyone with the link can view" · Photos appear on your card.</p>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Individual Photo Links <span class="text-slate-400 font-normal normal-case">(up to 3 — for thumbnail previews)</span></label>
-          <input type="url" id="vImg1" placeholder="https://drive.google.com/file/d/.../view" class="form-input mb-2" />
-          <input type="url" id="vImg2" placeholder="Second image link (optional)" class="form-input mb-2" />
-          <input type="url" id="vImg3" placeholder="Third image link (optional)" class="form-input" />
-          <p class="text-[10px] text-slate-400 mt-1">Share each photo → "Anyone with the link" → paste the share link here.</p>
-        </div>
-
-        <!-- Submit options -->
-        <div class="pt-2 space-y-3">
-          <button type="submit" id="waSubmitBtn" class="btn-wa w-full py-3.5 text-base shadow-lg rounded-xl">
-            <i class="fa-brands fa-whatsapp text-xl"></i> Submit via WhatsApp
-          </button>
-          <p class="text-center text-xs text-slate-400">
-            Your details open in WhatsApp for you to send to our ops line. We verify & list within 1 hour.
-          </p>
-        </div>
-      </form>
-    </div>
-
-    <!-- Trust signals -->
-    <div class="flex flex-wrap justify-center gap-6 mt-8 text-sm text-slate-500">
-      <div class="flex items-center gap-2"><i class="fa-solid fa-shield-check text-emerald-600"></i> Free listing, no hidden fees</div>
-      <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-blue-600"></i> Direct calls — zero commission</div>
-      <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-orange-500"></i> Live within 1 hour</div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== MARKETPLACE / DIRECTORY ===== -->
-<section id="marketplace" class="py-14 bg-white border-t border-slate-200 scroll-mt-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-      <div>
-        <span class="section-label">Live Directory</span>
-        <h2 class="font-display text-3xl font-bold text-slate-900 mt-2">Verified Tent Houses Across Hyderabad</h2>
-        <p class="text-sm text-slate-500 mt-1">Real vendors, real ratings · tap <i class="fa-solid fa-phone text-emerald-600"></i> to enquire directly</p>
-      </div>
-      <div class="flex items-center gap-3">
-        <span id="counter" class="bg-orange-50 border border-orange-200 text-orange-800 text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2">
-          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-          <span id="counterNumber">0</span> Vendors Active
-        </span>
-        <span id="syncStatus" class="hidden sm:flex items-center gap-1.5 text-[11px] font-medium text-slate-400">
-          <i class="fa-solid fa-rotate"></i> <span id="syncStatusText">Syncing…</span>
-        </span>
-        <button onclick="shareApp()" class="text-xs font-bold text-slate-600 border border-slate-300 px-3 py-2 rounded-full hover:border-orange-400 hover:text-orange-600 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-share-nodes"></i> Share
-        </button>
-      </div>
-    </div>
-
-    <!-- Vendor Cards Grid (dynamic) -->
-    <div id="directoryGrid" class="space-y-4"></div>
-
-    <!-- Empty state -->
-    <div id="emptyState" class="hidden text-center py-12">
-      <i class="fa-solid fa-magnifying-glass text-4xl text-slate-300 mb-4"></i>
-      <p class="text-slate-500 font-medium">No vendors found in your area yet.</p>
-      <p class="text-sm text-slate-400 mt-1">Be the first! <a href="#onboard" class="text-orange-600 font-semibold hover:underline">List your inventory →</a></p>
-    </div>
-
-    <!-- CTA to onboard -->
-    <div class="mt-10 bg-orange-50 border border-orange-200 rounded-2xl p-6 text-center">
-      <p class="font-bold text-slate-800">Your tent house isn't listed here yet.</p>
-      <p class="text-sm text-slate-500 mt-1">Join the network — free listing, direct enquiries to your phone.</p>
-      <a href="#onboard" class="btn-saffron px-6 py-2.5 mt-4 inline-flex text-sm rounded-xl">
-        <i class="fa-solid fa-plus-circle"></i> Add My Business
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PACKAGES ===== -->
-<section id="packages" class="py-16 bg-slate-50 scroll-mt-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-10">
-      <span class="section-label">Ready-Made Packages</span>
-      <h2 class="font-display text-3xl font-bold text-slate-900 mt-3">Standard Event Bundles</h2>
-      <p class="text-slate-500 mt-2">Pre-configured setups for common event sizes. All include on-time delivery.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Mini -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col hover:shadow-lg transition">
-        <span class="section-label text-[10px] self-start">Mini Events</span>
-        <h4 class="font-display text-xl font-bold text-slate-900 mt-3">Standard Celebration</h4>
-        <p class="text-sm text-slate-500 mt-1">Birthdays, Haldi, Naming ceremony.</p>
-        <hr class="my-4 border-slate-100" />
-        <ul class="text-sm text-slate-600 space-y-2.5 flex-1">
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Waterproof Shamiana (15×15 ft)</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> 50 Plastic Chairs + Covers</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> LED Lights & Power Wiring</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Carpet (Red/Green, 2 rolls)</li>
-        </ul>
-        <p class="text-xl font-bold text-slate-900 mt-4">₹8,000 <span class="text-sm font-normal text-slate-400">onwards</span></p>
-        <a href="#enquiry" class="mt-4 block w-full text-center bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2.5 rounded-xl text-sm transition">Get a Quote</a>
-      </div>
-      <!-- Popular -->
-      <div class="bg-white rounded-2xl p-6 border-2 relative flex flex-col hover:shadow-xl transition shadow-md" style="border-color:var(--saffron)">
-        <span class="absolute -top-3 right-4 text-[10px] font-bold text-white px-3 py-1 rounded-full uppercase tracking-wider" style="background:var(--saffron)">Most Booked</span>
-        <span class="section-label text-[10px] self-start">Weddings & Gatherings</span>
-        <h4 class="font-display text-xl font-bold text-slate-900 mt-3">Premium Social Block</h4>
-        <p class="text-sm text-slate-500 mt-1">Weddings, receptions, 100–200 guests.</p>
-        <hr class="my-4 border-slate-100" />
-        <ul class="text-sm text-slate-600 space-y-2.5 flex-1">
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Large Canopy (30×60 ft)</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> 150 Cushioned Chairs + Bows</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Decorated Entry Archway</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> PA Sound System + Stage Lights</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Tables (Round/Banquet — 15)</li>
-        </ul>
-        <p class="text-xl font-bold text-slate-900 mt-4">₹35,000 <span class="text-sm font-normal text-slate-400">onwards</span></p>
-        <a href="#enquiry" class="mt-4 block w-full text-center text-white font-bold py-2.5 rounded-xl text-sm transition" style="background:var(--saffron)" onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#f97316'">Get a Quote</a>
-      </div>
-      <!-- Elite -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col hover:shadow-lg transition">
-        <span class="section-label text-[10px] self-start" style="background:#f0f9ff;border-color:#bae6fd;color:#0369a1">Corporate / Grand</span>
-        <h4 class="font-display text-xl font-bold text-slate-900 mt-3">Elite Mega Setup</h4>
-        <p class="text-sm text-slate-500 mt-1">Corporate events, mass gatherings, 500+.</p>
-        <hr class="my-4 border-slate-100" />
-        <ul class="text-sm text-slate-600 space-y-2.5 flex-1">
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> German Alum Hangar Structure</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> 500+ Premium Seating Configs</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Elevated Stage + Branded Backdrop</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Line Array Sound + LED Wall</li>
-          <li><i class="fa-solid fa-check text-emerald-500 w-5"></i> Generator + Power Backup</li>
-        </ul>
-        <p class="text-xl font-bold text-slate-900 mt-4">₹1.2 L+ <span class="text-sm font-normal text-slate-400">custom quote</span></p>
-        <a href="#enquiry" class="mt-4 block w-full text-center bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2.5 rounded-xl text-sm transition">Get a Quote</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SOPs SECTION ===== -->
-<section id="sops" class="py-16 bg-white border-t border-slate-200 scroll-mt-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <span class="section-label">Standard Operating Procedures</span>
-      <h2 class="font-display text-3xl font-bold text-slate-900 mt-2">Event SOPs</h2>
-      <p class="mt-3 text-lg text-slate-500">Click on a tab below to view the detailed SOP for that event type.</p>
-    </div>
-    <div class="flex flex-wrap justify-center gap-2 mb-8">
-      <button class="sop-tab active" data-target="wedding">💒 Wedding</button>
-      <button class="sop-tab" data-target="birthday">🎂 Birthday</button>
-      <button class="sop-tab" data-target="corporate">🏢 Corporate</button>
-      <button class="sop-tab" data-target="political">🗳️ Political</button>
-      <button class="sop-tab" data-target="temple">🛕 Temple Festival</button>
-      <button class="sop-tab" data-target="school">🏫 School Annual Day</button>
-    </div>
-    <div class="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200">
-      <!-- Wedding -->
-      <div id="sop-wedding" class="sop-content active">
-        <h3>Wedding Setup SOP</h3>
-        <p><strong>Purpose:</strong> To provide a seamless, elegant, and timely setup for wedding ceremonies and receptions.</p>
-        <h4>Scope</h4>
-        <p>Covers all tent house services for weddings including mandap, reception area, dining, stage, lighting, and seating.</p>
-        <h4>Roles</h4>
-        <ul><li><strong>Site Supervisor:</strong> Overall coordination, client liaison, quality check.</li><li><strong>Crew Lead:</strong> Manages on-ground labour, assigns tasks.</li><li><strong>Technician:</strong> Handles electrical, lighting, and sound systems.</li><li><strong>Driver/Logistics:</strong> Transports materials and ensures timely delivery.</li></ul>
-        <h4>Pre-Event Planning (7–14 days prior)</h4>
-        <ul><li>Client Consultation: Confirm venue layout, guest count, and specific requirements.</li><li>Inventory Selection: Tents, seating, stage, flooring, lighting, sound.</li><li>Site Survey: Assess ground conditions, slope, and obstacles.</li><li>Logistics Planning: Schedule delivery and setup time (1–2 days before event).</li></ul>
-        <h4>On-Site Setup (1–2 days before event)</h4>
-        <ul><li>Site Preparation: Clear debris, level ground, lay tarpaulin.</li><li>Tent/Pandal Installation: Erect poles, secure with ropes, install canopy.</li><li>Stage Construction: Assemble stage platform, install backdrop.</li><li>Seating & Dining Layout: Arrange chairs, tables, buffet counters.</li><li>Lighting & Electrical: Run cables, install decorative lights, test connections.</li><li>Final Walkthrough: Check alignment, aesthetics, and safety.</li></ul>
-        <h4>Event Day Operations</h4>
-        <ul><li>Supervisor on-site, power backup available, monitor weather.</li><li>Assist with guest flow and accessibility.</li></ul>
-        <h4>Teardown & Cleanup</h4>
-        <ul><li>Dismantle tents and structures carefully, pack items, clean venue.</li></ul>
-        <h4>Post-Event Review</h4>
-        <ul><li>Collect client feedback, document damages, update inventory.</li></ul>
-      </div>
-      <!-- Birthday -->
-      <div id="sop-birthday" class="sop-content">
-        <h3>Birthday Events SOP</h3>
-        <p><strong>Purpose:</strong> To create a fun, safe, and vibrant setup for birthday celebrations.</p>
-        <h4>Scope</h4><p>Small to medium-sized birthday parties (20–100 guests) with tenting, seating, and themed decorations.</p>
-        <h4>Roles</h4><ul><li><strong>Event Coordinator:</strong> Liaises with client, manages on-ground team.</li><li><strong>Decorator:</strong> Handles balloons, banners, centrepieces.</li><li><strong>Crew:</strong> Tent erection, furniture placement.</li></ul>
-        <h4>Pre-Event Planning (5–7 days prior)</h4>
-        <ul><li>Determine guest count, age group, and theme.</li><li>Select tent/canopy, plastic chairs, themed decorations, sound system.</li><li>Site assessment: layout for activity, dining, cake table.</li></ul>
-        <h4>On-Site Setup (day of event, 3–4 hours before)</h4>
-        <ul><li>Clean area, erect tent/canopy, arrange seating.</li><li>Set up decorations: balloon arches, table centrepieces, cake table.</li><li>Install sound system, place garbage bins.</li></ul>
-        <h4>Event Day Operations</h4><ul><li>Monitor children’s activities, ensure food stations accessible.</li></ul>
-        <h4>Teardown & Cleanup</h4><ul><li>Dismantle decorations, fold chairs, pack tents, clean venue.</li></ul>
-      </div>
-      <!-- Corporate -->
-      <div id="sop-corporate" class="sop-content">
-        <h3>Corporate Conferences SOP</h3>
-        <p><strong>Purpose:</strong> To deliver a professional, tech-enabled setup for corporate meetings and conferences.</p>
-        <h4>Scope</h4><p>Registration area, main hall, breakout rooms, catering spaces.</p>
-        <h4>Roles</h4><ul><li><strong>AV Specialist:</strong> Sound, projectors, screens, recording.</li><li><strong>Logistics Manager:</strong> Coordinates furniture, signage, and materials.</li><li><strong>Crew:</strong> Tent/stage setup and furniture placement.</li></ul>
-        <h4>Pre-Event Planning (7–10 days prior)</h4>
-        <ul><li>Obtain agenda, number of attendees, AV requirements.</li><li>Select large span tents, conference chairs, stage, AV equipment, lighting.</li><li>Site survey: acoustics, power capacity, internet connectivity.</li></ul>
-        <h4>On-Site Setup (1 day before conference)</h4>
-        <ul><li>Erect tents, set up stage and seating, install AV equipment.</li><li>Place furniture, registration desk, signage.</li><li>Test all equipment, run through session flow.</li></ul>
-        <h4>Event Day Operations</h4><ul><li>AV technician on standby, seamless transitions, crowd management.</li></ul>
-        <h4>Teardown & Cleanup</h4><ul><li>Dismantle AV equipment, pack furniture, clean venue.</li></ul>
-      </div>
-      <!-- Political -->
-      <div id="sop-political" class="sop-content">
-        <h3>Political Meetings SOP</h3>
-        <p><strong>Purpose:</strong> To provide a robust, secure, and functional setup for political rallies and public meetings.</p>
-        <h4>Scope</h4><p>Large gatherings (500–10,000+) with stage, sound, seating, and crowd control barriers.</p>
-        <h4>Roles</h4><ul><li><strong>Site Supervisor:</strong> Coordinates with event organisers and security.</li><li><strong>Sound Engineer:</strong> Manages PA system and mics.</li><li><strong>Security Liaison:</strong> Works with local authorities for safety.</li></ul>
-        <h4>Pre-Event Planning (10–14 days prior)</h4>
-        <ul><li>Risk assessment, coordinate with police for permissions.</li><li>Select large tents, heavy-duty stage, PA system, seating, barriers.</li><li>Site survey: ground stability, power source, medical aid.</li></ul>
-        <h4>On-Site Setup (1–2 days prior)</h4>
-        <ul><li>Erect stage with ramp, install backdrop.</li><li>Set up PA system, test coverage.</li><li>Arrange VIP seating, install barriers, signage.</li><li>Connect to main power and generator.</li></ul>
-        <h4>Event Day Operations</h4><ul><li>Secure stage, audio check, monitor crowd pressure, coordinate with security.</li></ul>
-        <h4>Teardown & Cleanup</h4><ul><li>Dismantle stage and sound, remove barriers, clean site.</li></ul>
-      </div>
-      <!-- Temple -->
-      <div id="sop-temple" class="sop-content">
-        <h3>Temple Festivals SOP</h3>
-        <p><strong>Purpose:</strong> To facilitate religious festivals by setting up temporary structures for rituals, prasad distribution, and devotee accommodation.</p>
-        <h4>Scope</h4><p>Mandap, kitchen, dining, queue management.</p>
-        <h4>Roles</h4><ul><li><strong>Religious Coordinator:</strong> Liaises with temple priests and management.</li><li><strong>Logistics Crew:</strong> Sets up tents, seating, and catering areas.</li><li><strong>Sanitation Team:</strong> Manages waste and cleaning.</li></ul>
-        <h4>Pre-Event Planning (7–10 days prior)</h4>
-        <ul><li>Understand festival schedule, rituals, expected crowd.</li><li>Select large mandaps, temporary sheds, plastic chairs, cooking area, queue barriers.</li><li>Site survey: ground condition, water availability, waste disposal.</li></ul>
-        <h4>On-Site Setup (2–3 days prior)</h4>
-        <ul><li>Erect mandap with side coverings, place altar/deity platform.</li><li>Set up temporary kitchen, dining area, serving counters.</li><li>Install queue barriers, shade for waiting devotees.</li><li>Place portable toilets and garbage bins.</li></ul>
-        <h4>Event Day Operations</h4><ul><li>Ensure fire extinguishers handy, monitor food safety, coordinate volunteers.</li></ul>
-        <h4>Teardown & Cleanup</h4><ul><li>Dismantle structures after final rituals, clean temple premises.</li></ul>
-      </div>
-      <!-- School -->
-      <div id="sop-school" class="sop-content">
-        <h3>School Annual Days SOP</h3>
-        <p><strong>Purpose:</strong> To organise a vibrant, safe, and professional setup for school annual day functions.</p>
-        <h4>Scope</h4><p>Stage, seating, sound, lighting, backstage arrangements.</p>
-        <h4>Roles</h4><ul><li><strong>Event Manager:</strong> Coordinates with school staff and teachers.</li><li><strong>Stage Crew:</strong> Builds stage, manages props.</li><li><strong>AV Technician:</strong> Sound, lighting, presentation.</li></ul>
-        <h4>Pre-Event Planning (10–14 days prior)</h4>
-        <ul><li>Obtain program schedule, number of performers, audience size.</li><li>Select stage with backdrop, chairs, sound system, lighting.</li><li>Site survey: power capacity, rain contingency plan.</li></ul>
-        <h4>On-Site Setup (1 day before)</h4>
-        <ul><li>Build stage with appropriate height, install backdrop.</li><li>Arrange seating: dignitaries, students, parents.</li><li>Install speakers, mics, projector.</li><li>Set up backstage with changing tents.</li><li>Install stage lighting and ambient hall lighting.</li></ul>
-        <h4>Event Day Operations</h4><ul><li>Conduct sound check and light rehearsal, coordinate with teachers, ensure safety.</li></ul>
-        <h4>Teardown & Cleanup</h4><ul><li>Dismantle stage, AV, and seating, clean venue, collect feedback.</li></ul>
-      </div>
-    </div>
-    <div class="mt-10 bg-blue-50 rounded-2xl p-6 border border-blue-200">
-      <h3 class="font-bold text-slate-800 text-lg">Cross-Event Best Practices</h3>
-      <ul class="list-disc list-inside mt-2 text-sm text-slate-700 space-y-1">
-        <li><strong>Safety First:</strong> Site risk assessment and first-aid kit on site.</li>
-        <li><strong>Power Backup:</strong> Generator for critical systems.</li>
-        <li><strong>Communication:</strong> Walkie-talkie or phone contact among crew.</li>
-        <li><strong>Weather Preparedness:</strong> Contingency for rain/wind.</li>
-        <li><strong>Client Feedback:</strong> Gather feedback to improve future events.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- INVENTORY GUIDE SECTION (NEW)                                 -->
-<!-- ============================================================ -->
-<section id="inventory-guide" class="inventory-guide-section py-16 scroll-mt-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <span class="section-label">Ideal Inventory Guide</span>
-      <h2 class="font-display text-3xl font-bold text-slate-900 mt-2">What to Stock for Every Event</h2>
-      <p class="mt-3 text-lg text-slate-500">Complete itemized checklists, a smart calculator, and seasonal tips for Hyderabad vendors.</p>
-    </div>
-
-    <!-- Guest Calculator -->
-    <div class="ig-card p-6 mb-8">
-      <div class="ig-calc-row">
-        <label>Expected Guests:</label>
-        <input type="range" id="guestSlider" min="20" max="1000" value="100" step="10" oninput="updateCalc()">
-        <div class="ig-value" id="guestValue">100</div>
-      </div>
-      <div class="ig-results" id="calcResults">
-        <div class="ig-result-item">
-          <div class="ig-label">Chairs Needed</div>
-          <div class="ig-val" id="chairs">110</div>
-          <div class="ig-unit">(110% of guests)</div>
-        </div>
-        <div class="ig-result-item">
-          <div class="ig-label">Tables (6-seater)</div>
-          <div class="ig-val" id="tables">19</div>
-          <div class="ig-unit">round/banquet</div>
-        </div>
-        <div class="ig-result-item">
-          <div class="ig-label">Tent Area</div>
-          <div class="ig-val" id="tentArea">1,500</div>
-          <div class="ig-unit">sq ft minimum</div>
-        </div>
-        <div class="ig-result-item">
-          <div class="ig-label">LED Lights</div>
-          <div class="ig-val" id="lights">25</div>
-          <div class="ig-unit">flood + string</div>
-        </div>
-        <div class="ig-result-item">
-          <div class="ig-label">Power Load</div>
-          <div class="ig-val" id="power">5</div>
-          <div class="ig-unit">kW estimated</div>
-        </div>
-        <div class="ig-result-item">
-          <div class="ig-label">Labourers</div>
-          <div class="ig-val" id="labour">4</div>
-          <div class="ig-unit">for setup</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tips Box -->
-    <div class="ig-tips-box">
-      <h4>🔑 Pro Inventory Tips for Hyderabad Vendors</h4>
-      <ul>
-        <li>Always stock <strong>10% extra chairs</strong> — late arrivals and gate-crashers are common at Indian weddings.</li>
-        <li>Keep <strong>monsoon backup tents</strong> in stock year-round; Hyderabad pre-monsoon showers start as early as April.</li>
-        <li>White chair covers get stained fastest — maintain a <strong>20% surplus</strong> of covers vs. chairs.</li>
-        <li>For summer events (Mar–Jun), <strong>pedestal fans and air-coolers</strong> are non-negotiable; guests will walk out otherwise.</li>
-        <li>Label every item with a <strong>QR code or serial number</strong> — theft and mix-ups at multi-vendor venues are frequent.</li>
-        <li>Store <strong>3-phase power cables</strong> for large events; most banquet halls in Gachibowli/Hitech City have 3-phase supply.</li>
-      </ul>
-    </div>
-
-    <!-- By Event Type -->
-    <h3 class="font-display text-2xl font-bold text-slate-900 mt-12 mb-6">Inventory by Event Type</h3>
-    <div class="ig-event-grid">
-
-      <!-- Wedding 200 guests -->
-      <div class="ig-card">
-        <div class="ig-event-header" style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);">
-          <h3>💒 Wedding / Reception</h3>
-          <span class="ig-guest-badge">200 Guests</span>
-        </div>
-        <div class="event-inv-body">
-          <ul class="ig-inv-list">
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Waterproof Shamiana (30×60 ft)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Dining Tent (20×40 ft)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Cushioned Chairs + Covers</span><span class="ig-qty">220 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Round Tables (6-seater)</span><span class="ig-qty">35 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Stage Platform (16×12 ft)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> LED Flood Lights</span><span class="ig-qty">20 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> String Lights (warm white)</span><span class="ig-qty">100 m</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Decorative Entry Arch</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Red/Green Carpet Rolls</span><span class="ig-qty">8 rolls</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> PA Sound System</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Generator (15 kVA)</span><span class="ig-qty">1 unit</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> LED Wall / Projector</span><span class="ig-qty">1 unit</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> VIP Sofa Set (3+1+1)</span><span class="ig-qty">2 sets</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Flower Decoration Stand</span><span class="ig-qty">10 pcs</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Haldi 80 guests -->
-      <div class="ig-card">
-        <div class="ig-event-header" style="background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);">
-          <h3>🌼 Haldi / Mehendi</h3>
-          <span class="ig-guest-badge">80 Guests</span>
-        </div>
-        <div class="event-inv-body">
-          <ul class="ig-inv-list">
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Waterproof Canopy (20×30 ft)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Floor Cushions + Bolsters</span><span class="ig-qty">90 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Plastic Chairs (backup)</span><span class="ig-qty">30 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Stain-Proof Floor Cover</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> LED String Lights</span><span class="ig-qty">50 m</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Changing Tent (6×6 ft)</span><span class="ig-qty">2 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Yellow / Green Drapes</span><span class="ig-qty">20 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Low Tables (floor seating)</span><span class="ig-qty">12 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Pedestal Fans</span><span class="ig-qty">4 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Photo Booth Frame</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Umbrella Decor (haldi theme)</span><span class="ig-qty">10 pcs</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Birthday 50 guests -->
-      <div class="ig-card">
-        <div class="ig-event-header" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
-          <h3>🎂 Birthday / Naming Ceremony</h3>
-          <span class="ig-guest-badge">50 Guests</span>
-        </div>
-        <div class="event-inv-body">
-          <ul class="ig-inv-list">
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Shamiana (15×20 ft)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Plastic Chairs + Covers</span><span class="ig-qty">55 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Cake Table (reinforced)</span><span class="ig-qty">1 pc</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Gift Table</span><span class="ig-qty">1 pc</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> LED Fairy Lights</span><span class="ig-qty">30 m</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Kids Chairs (small size)</span><span class="ig-qty">15 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Balloon Arch Stand</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Photo Booth Props</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Extension Boards (child-safe)</span><span class="ig-qty">4 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Bouncy Castle (if outdoor)</span><span class="ig-qty">1 unit</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Candy / Popcorn Cart</span><span class="ig-qty">1 pc</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Corporate 150 guests -->
-      <div class="ig-card">
-        <div class="ig-event-header" style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);">
-          <h3>🏢 Corporate Event / Conference</h3>
-          <span class="ig-guest-badge">150 Guests</span>
-        </div>
-        <div class="event-inv-body">
-          <ul class="ig-inv-list">
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> German Hangar / Alum Structure</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Conference Chairs (cushioned)</span><span class="ig-qty">160 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Podium with Mic Holder</span><span class="ig-qty">1 pc</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Projector Screen (10×8 ft)</span><span class="ig-qty">1 pc</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Branded Backdrop (taut fabric)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> White/Blue Drapes</span><span class="ig-qty">30 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Registration Desk</span><span class="ig-qty">2 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Power Strips (every 3rd chair)</span><span class="ig-qty">50 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Line Array Sound</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> AC Units / Industrial Coolers</span><span class="ig-qty">4 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> LED Wall (for branding)</span><span class="ig-qty">1 unit</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Wi-Fi Router Boosters</span><span class="ig-qty">3 pcs</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Religious 60 guests -->
-      <div class="ig-card">
-        <div class="ig-event-header" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);">
-          <h3>🙏 Satyanarayana Vratam / Pooja</h3>
-          <span class="ig-guest-badge">60 Guests</span>
-        </div>
-        <div class="event-inv-body">
-          <ul class="ig-inv-list">
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> White / Saffron Shamiana</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Floor Mats (cotton)</span><span class="ig-qty">70 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Mandap Frame (wood/metal)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Havan Kund Stand</span><span class="ig-qty">1 pc</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Warm White LED Lights</span><span class="ig-qty">15 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Prasadam Distribution Table</span><span class="ig-qty">2 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Flower Decoration Baskets</span><span class="ig-qty">8 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Banana Leaf Rolls (if serving)</span><span class="ig-qty">70 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Brass Urli (decorative)</span><span class="ig-qty">2 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Diya Stands</span><span class="ig-qty">10 pcs</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Outdoor 500+ guests -->
-      <div class="ig-card">
-        <div class="ig-event-header" style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);">
-          <h3>🎪 Outdoor Mela / Mass Gathering</h3>
-          <span class="ig-guest-badge">500+ Guests</span>
-        </div>
-        <div class="event-inv-body">
-          <ul class="ig-inv-list">
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Heavy-Duty Tents (40×80 ft)</span><span class="ig-qty">3 sets</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Plastic Chairs</span><span class="ig-qty">550 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Queue Management Railings</span><span class="ig-qty">50 m</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Fire Extinguishers</span><span class="ig-qty">10 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> First-Aid Tent (marked)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Drinking Water Stations</span><span class="ig-qty">5 sets</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Generator (30 kVA)</span><span class="ig-qty">2 units</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Sandbags / Tent Pegs (heavy)</span><span class="ig-qty">100 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Portable Toilets</span><span class="ig-qty">6 units</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> PA System (long-range)</span><span class="ig-qty">1 set</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> CCTV Mounting Stands</span><span class="ig-qty">4 pcs</span></li>
-            <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Waste Bins (large)</span><span class="ig-qty">15 pcs</span></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Master Checklist -->
-    <div class="mt-16">
-      <h3 class="font-display text-2xl font-bold text-slate-900 mb-4">Master Inventory Checklist (All Events)</h3>
-      <p class="text-slate-600 mb-4 text-sm">Use this table to audit your godown stock before the busy season. Quantities shown are <strong>minimum viable stock</strong> for a mid-size vendor serving 3 events/week.</p>
-
-      <table class="ig-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Item</th>
-            <th>Min Stock</th>
-            <th>Ideal Stock</th>
-            <th>Condition Check</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="ig-category"><td colspan="5">🏗️ Tents & Structures</td></tr>
-          <tr><td></td><td>Waterproof Shamiana (20×20 ft)</td><td>2</td><td>4</td><td>No tears, poles straight</td></tr>
-          <tr><td></td><td>Waterproof Shamiana (30×60 ft)</td><td>1</td><td>2</td><td>No tears, poles straight</td></tr>
-          <tr><td></td><td>Dining Tent (20×40 ft)</td><td>1</td><td>2</td><td>Ventilation flaps working</td></tr>
-          <tr><td></td><td>German Hangar / Alum Structure</td><td>0</td><td>1</td><td>All joints, bolts intact</td></tr>
-          <tr><td></td><td>Stage Platform (modular)</td><td>1</td><td>2</td><td>Load test annually</td></tr>
-
-          <tr class="ig-category"><td colspan="5">🪑 Seating & Tables</td></tr>
-          <tr class="ig-highlight"><td></td><td>Plastic Chairs (standard)</td><td>200</td><td>400</td><td>No cracks, stackable</td></tr>
-          <tr><td></td><td>Cushioned Chairs (premium)</td><td>100</td><td>250</td><td>Upholstery clean, no sag</td></tr>
-          <tr><td></td><td>Kids Chairs (small)</td><td>20</td><td>50</td><td>Stable, no sharp edges</td></tr>
-          <tr><td></td><td>Round Tables (6-seater)</td><td>15</td><td>30</td><td>Level, clean surface</td></tr>
-          <tr><td></td><td>Banquet Tables (rectangular)</td><td>10</td><td>20</td><td>Level, clean surface</td></tr>
-          <tr><td></td><td>Low Tables (floor seating)</td><td>10</td><td>20</td><td>Stable on uneven ground</td></tr>
-          <tr><td></td><td>Floor Cushions + Bolsters</td><td>100</td><td>200</td><td>Covers washable, filling firm</td></tr>
-          <tr><td></td><td>VIP Sofa Set (3+1+1)</td><td>1</td><td>2</td><td>Upholstery pristine</td></tr>
-
-          <tr class="ig-category"><td colspan="5">💡 Lighting & Electrical</td></tr>
-          <tr class="ig-highlight"><td></td><td>LED Flood Lights (100W)</td><td>20</td><td>40</td><td>All bulbs working</td></tr>
-          <tr><td></td><td>LED String Lights (warm white)</td><td>200 m</td><td>500 m</td><td>No dead segments</td></tr>
-          <tr><td></td><td>LED Fairy Lights (multi-colour)</td><td>100 m</td><td>300 m</td><td>No dead segments</td></tr>
-          <tr><td></td><td>Extension Boards (5-socket)</td><td>10</td><td>20</td><td>ISI mark, no exposed wires</td></tr>
-          <tr><td></td><td>3-Phase Power Cables (heavy)</td><td>50 m</td><td>100 m</td><td>Insulation intact</td></tr>
-          <tr><td></td><td>Generator (15 kVA)</td><td>1</td><td>2</td><td>Service every 100 hrs</td></tr>
-          <tr><td></td><td>Generator (30 kVA)</td><td>0</td><td>1</td><td>Service every 100 hrs</td></tr>
-
-          <tr class="ig-category"><td colspan="5">🎤 Sound & AV</td></tr>
-          <tr><td></td><td>PA Sound System (basic)</td><td>1</td><td>2</td><td>Mic, speakers, mixer tested</td></tr>
-          <tr><td></td><td>Line Array Sound (premium)</td><td>0</td><td>1</td><td>Full frequency test</td></tr>
-          <tr><td></td><td>Projector + Screen</td><td>1</td><td>2</td><td>Lamp hours < 2000</td></tr>
-          <tr><td></td><td>LED Wall (P3/P4)</td><td>0</td><td>1</td><td>Dead pixel check</td></tr>
-
-          <tr class="ig-category"><td colspan="5">🎨 Decor & Drapes</td></tr>
-          <tr class="ig-highlight"><td></td><td>Chair Covers (white)</td><td>250</td><td>500</td><td>Stain-free, ironed</td></tr>
-          <tr><td></td><td>Table Cloths (round/rect)</td><td>30</td><td>60</td><td>Stain-free, ironed</td></tr>
-          <tr><td></td><td>Red Carpet Rolls</td><td>4</td><td>8</td><td>No fraying edges</td></tr>
-          <tr><td></td><td>Green Carpet Rolls</td><td>4</td><td>8</td><td>No fraying edges</td></tr>
-          <tr><td></td><td>White Drapes (premium)</td><td>20</td><td>40</td><td>No yellowing</td></tr>
-          <tr><td></td><td>Blue Drapes (corporate)</td><td>10</td><td>20</td><td>No fading</td></tr>
-          <tr><td></td><td>Yellow/Green Drapes (haldi)</td><td>10</td><td>20</td><td>Vibrant colour</td></tr>
-          <tr><td></td><td>Decorative Entry Arch</td><td>1</td><td>2</td><td>Frame stable, fabric clean</td></tr>
-          <tr><td></td><td>Photo Booth Frame</td><td>1</td><td>2</td><td>Customizable panels</td></tr>
-          <tr><td></td><td>Balloon Arch Stand</td><td>1</td><td>2</td><td>All clips present</td></tr>
-
-          <tr class="ig-category"><td colspan="5">🛠️ Tools & Safety</td></tr>
-          <tr><td></td><td>Tool Box (hammers, spanners, pliers)</td><td>2</td><td>3</td><td>Complete set</td></tr>
-          <tr><td></td><td>Fire Extinguisher (ABC type)</td><td>2</td><td>4</td><td>Pressure gauge green</td></tr>
-          <tr><td></td><td>First-Aid Kit</td><td>2</td><td>3</td><td>Expiry dates checked</td></tr>
-          <tr><td></td><td>Sandbags (for tent anchoring)</td><td>20</td><td>40</td><td>No leaks</td></tr>
-          <tr><td></td><td>Heavy Tent Pegs (1 ft)</td><td>50</td><td>100</td><td>No bending</td></tr>
-          <tr><td></td><td>Rope (nylon, 10mm, 50m rolls)</td><td>4</td><td>8</td><td>No fraying</td></tr>
-
-          <tr class="ig-category"><td colspan="5">🌀 Climate Control</td></tr>
-          <tr><td></td><td>Pedestal Fans (18 inch)</td><td>10</td><td>20</td><td>Blades clean, motor quiet</td></tr>
-          <tr><td></td><td>Industrial Air Coolers</td><td>2</td><td>4</td><td>Pads replaced, tank clean</td></tr>
-          <tr><td></td><td>Exhaust Fans (for dining tent)</td><td>4</td><td>8</td><td>High CFM, quiet</td></tr>
-
-          <tr class="ig-category"><td colspan="5">📦 Consumables & Accessories</td></tr>
-          <tr><td></td><td>Floor Covering Plastic Sheets</td><td>10 rolls</td><td>20 rolls</td><td>Heavy gauge (200+ micron)</td></tr>
-          <tr><td></td><td>Packing Tape (heavy duty)</td><td>10 rolls</td><td>20 rolls</td><td>Strong adhesive</td></tr>
-          <tr><td></td><td>Zip Ties (assorted sizes)</td><td>200 pcs</td><td>500 pcs</td><td>UV resistant</td></tr>
-          <tr><td></td><td>Garbage Bags (large)</td><td>50</td><td>100</td><td>Tear-resistant</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Seasonal Adjustments -->
-    <div class="mt-16">
-      <h3 class="font-display text-2xl font-bold text-slate-900 mb-4">Seasonal Inventory Adjustments (Hyderabad)</h3>
-      <div class="ig-event-grid">
-        <div class="ig-card">
-          <div class="ig-event-header" style="background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);">
-            <h3>☀️ Summer (Mar–Jun)</h3>
-          </div>
-          <div class="event-inv-body">
-            <ul class="ig-inv-list">
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Double air-cooler stock</span><span class="ig-qty">+100%</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> White/light-coloured drapes</span><span class="ig-qty">+50%</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Mist fans (outdoor)</span><span class="ig-qty">+4 units</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Drinking water dispensers</span><span class="ig-qty">+5 units</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Sun-blocking side curtains</span><span class="ig-qty">+10 pcs</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="ig-card">
-          <div class="ig-event-header" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
-            <h3>🌧️ Monsoon (Jul–Oct)</h3>
-          </div>
-          <div class="event-inv-body">
-            <ul class="ig-inv-list">
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Waterproof tent stock</span><span class="ig-qty">+2 backup sets</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Heavy sandbags / pegs</span><span class="ig-qty">+50%</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Plastic ground sheets</span><span class="ig-qty">+20 rolls</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Anti-slip mats</span><span class="ig-qty">+30 pcs</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Drainage channel covers</span><span class="ig-qty">+10 pcs</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="ig-card">
-          <div class="ig-event-header" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
-            <h3>🍂 Winter (Nov–Feb)</h3>
-          </div>
-          <div class="event-inv-body">
-            <ul class="ig-inv-list">
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-essential"></span> Closed-side tent panels</span><span class="ig-qty">+20 pcs</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Portable room heaters</span><span class="ig-qty">+6 units</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-recommended"></span> Warm lighting (2700K)</span><span class="ig-qty">Replace cool white</span></li>
-              <li><span class="ig-item-name"><span class="ig-dot ig-dot-optional"></span> Blanket / shawl storage</span><span class="ig-qty">1 rack</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer CTA -->
-    <div class="ig-footer-cta">
-      <h2>Need a Custom Inventory Audit?</h2>
-      <p>We help tent house owners assess gaps and plan purchases for the upcoming season.</p>
-      <a href="https://wa.me/919948680017" class="btn-ig" target="_blank">Chat on WhatsApp</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ENQUIRY FORM ===== -->
-<section id="enquiry" class="py-16 bg-white border-t border-slate-200 scroll-mt-20">
-  <div class="max-w-2xl mx-auto px-4">
-    <div class="text-center mb-8">
-      <span class="section-label">Public Enquiry</span>
-      <h2 class="font-display text-3xl font-bold text-slate-900 mt-3">Tell Us What You Need</h2>
-      <p class="text-slate-500 mt-2">Our ops team will match you with the right vendor and call you back within 15 minutes.</p>
-    </div>
-    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-10">
-      <form id="enquiryForm" class="space-y-4" onsubmit="submitEnquiry(event)">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Full Name <span class="text-red-500">*</span></label>
-            <input type="text" id="enqName" required placeholder="Your name" class="form-input" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Mobile Number <span class="text-red-500">*</span></label>
-            <input type="tel" id="enqPhone" required placeholder="10-digit number" class="form-input" />
-          </div>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Event Date <span class="text-red-500">*</span></label>
-            <input type="date" id="enqDate" required class="form-input" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Guest Count</label>
-            <select id="enqSize" class="form-input">
-              <option value="Under 50">Under 50 Pax</option>
-              <option value="50–100">50 — 100 Pax</option>
-              <option value="100–300" selected>100 — 300 Pax</option>
-              <option value="300–500">300 — 500 Pax</option>
-              <option value="500+">500+ Pax</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Event Location / Area <span class="text-red-500">*</span></label>
-          <input type="text" id="enqArea" required placeholder="e.g., Miyapur, Dilsukhnagar, LB Nagar" class="form-input" />
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">What do you need? <span class="text-slate-400 font-normal normal-case">(optional but helpful)</span></label>
-          <textarea id="enqNeeds" rows="2" placeholder="e.g., Shamiana for 150 guests, 200 chairs, basic sound system" class="form-input resize-none"></textarea>
-        </div>
-        <!-- Two CTAs -->
-        <div class="space-y-3 pt-1">
-          <button type="submit" id="enqWaBtn" class="btn-wa w-full py-3.5 text-base rounded-xl shadow-lg">
-            <i class="fa-brands fa-whatsapp text-xl"></i> Send Enquiry via WhatsApp
-          </button>
-          <button type="button" onclick="submitEnquiryCallback()" class="btn-green w-full py-3 text-sm rounded-xl">
-            <i class="fa-solid fa-phone"></i> Request a Callback Instead
-          </button>
-        </div>
-        <div id="enquiryFeedback" class="hidden text-sm font-medium text-center py-2 rounded-xl"></div>
-      </form>
-    </div>
-    <!-- Direct WA shortcut -->
-    <div class="mt-6 text-center">
-      <p class="text-sm text-slate-500 mb-3">Or reach us directly:</p>
-      <a href="https://wa.me/919948680017?text=Hi%20TentWala%2C%20I%20need%20help%20with%20my%20event." target="_blank" class="btn-wa inline-flex px-8 py-3 rounded-xl text-sm shadow">
-        <i class="fa-brands fa-whatsapp text-lg"></i> Chat with TentWala on WhatsApp
-      </a>
-      <p class="text-xs text-slate-400 mt-2">+91 99486 80017 · nbraju@hotmail.com</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PARTNER / CTA ===== -->
-<section class="bg-slate-900 text-white py-16 px-4">
-  <div class="max-w-5xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <div>
-        <span class="text-orange-400 text-xs font-bold tracking-widest uppercase bg-orange-500/10 px-4 py-1 rounded-full inline-block border border-orange-500/20">Partner Network</span>
-        <h3 class="font-display text-3xl font-bold mt-4">Own a Local Tent House?</h3>
-        <p class="text-slate-300 text-lg mt-2 max-w-md">Get your inventory in front of thousands of Hyderabad families planning their next big event. <strong class="text-white">Zero upfront cost.</strong></p>
-        <ul class="mt-5 space-y-2.5 text-sm text-slate-300">
-          <li><i class="fa-solid fa-check-circle text-emerald-400 w-6"></i> Free listing &amp; direct enquiry routing</li>
-          <li><i class="fa-solid fa-check-circle text-emerald-400 w-6"></i> No commission on direct calls</li>
-          <li><i class="fa-solid fa-check-circle text-emerald-400 w-6"></i> Visibility across Hyderabad, Rangareddy &amp; Medchal</li>
-          <li><i class="fa-solid fa-check-circle text-emerald-400 w-6"></i> WhatsApp-first — no app to download</li>
-        </ul>
-      </div>
-      <div class="space-y-3">
-        <a href="#onboard" class="btn-saffron w-full py-4 text-lg rounded-xl shadow-xl">
-          <i class="fa-solid fa-store"></i> List My Tent House — Free
-        </a>
-        <a href="https://wa.me/919948680017?text=Hello%2C%20I%20want%20to%20partner%20my%20tent%20house%20with%20TentWala" target="_blank" class="btn-wa w-full py-3.5 text-base rounded-xl">
-          <i class="fa-brands fa-whatsapp text-xl"></i> Partner via WhatsApp
-        </a>
-        <a href="mailto:nbraju@hotmail.com" class="w-full py-3 rounded-xl border border-slate-600 text-slate-300 hover:border-slate-400 text-sm font-medium transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-envelope"></i> nbraju@hotmail.com
-        </a>
-        <p class="text-xs text-slate-500 text-center">📞 Ops Line: +91 99486 80017</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="bg-white border-t border-slate-200 py-10 px-4">
-  <div class="max-w-7xl mx-auto">
-    <div class="flex flex-wrap justify-between items-center gap-6">
-      <div>
-        <div class="font-display text-xl font-extrabold text-slate-900">
-          <span style="color:var(--saffron)">Tent</span>Wala
-        </div>
-        <p class="text-xs text-slate-400 mt-1">Hyderabad's tent house & event rental network</p>
-        <p class="text-xs text-slate-400">A BharatStack Ventures initiative · nbraju@hotmail.com</p>
-      </div>
-      <div class="flex flex-wrap gap-4 text-sm text-slate-500">
-        <a href="#onboard" class="hover:text-orange-600 transition">List Inventory</a>
-        <a href="#marketplace" class="hover:text-orange-600 transition">Browse Vendors</a>
-        <a href="#packages" class="hover:text-orange-600 transition">Packages</a>
-        <a href="#sops" class="hover:text-orange-600 transition">SOPs</a>
-        <a href="#inventory-guide" class="hover:text-orange-600 transition">Inventory Guide</a>
-        <a href="#enquiry" class="hover:text-orange-600 transition">Enquiry</a>
-        <a href="https://wa.me/919948680017" target="_blank" class="hover:text-green-600 transition"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-      </div>
-    </div>
-    <div class="mt-6 pt-6 border-t border-slate-100 text-center text-xs text-slate-400">
-      <p>© 2026 TentWala · BharatStack Ventures. Built for hyper-local event infrastructure aggregation in Hyderabad.</p>
-    </div>
-  </div>
-</footer>
-
-<!-- ============================================================ -->
-<!-- VENDOR DETAIL MODAL                                           -->
-<!-- ============================================================ -->
-<div class="modal-overlay" id="vendorModal">
-  <div class="modal-content">
-    <span class="modal-close" id="modalClose">&times;</span>
-    <div id="modalBody">
-      <!-- Dynamic content injected -->
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================ -->
-<!-- CHATBOT                                                       -->
-<!-- ============================================================ -->
-<button class="chat-toggle" id="chatToggle" title="Chat with AI Assistant">
-  <i class="fa-regular fa-comment-dots"></i>
-</button>
-<div class="chat-widget" id="chatWidget">
-  <div class="chat-header">
-    <span><i class="fa-regular fa-comment-dots mr-2"></i> TentWala AI</span>
-    <button class="text-white/80 hover:text-white" id="chatClose">&times;</button>
-  </div>
-  <div class="chat-messages" id="chatMessages">
-    <div class="chat-message bot">👋 Hi! I'm your AI assistant. Ask me about inventory, pricing, or availability!</div>
-  </div>
-  <div class="chat-input-area">
-    <input type="text" id="chatInput" placeholder="Type your question..." />
-    <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition text-sm font-bold" id="chatSend">Send</button>
-  </div>
-</div>
-
-<!-- ============================================================ -->
-<!-- JAVASCRIPT                                                    -->
-<!-- ============================================================ -->
-<script>
-(function () {
-  'use strict';
-
-  // ===== BACKEND CONFIG =====
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwVshavTK1yv5gBqvs--6gep0NdbJsbx4nEWmjyJy6sJWdGwAaeLC4y6pFpo4slxgWu6w/exec';
-
-  function backendEnabled() {
-    return GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf('https://script.google.com') === 0;
-  }
-
-  function postToBackend(payload) {
-    if (!backendEnabled()) return Promise.resolve(null);
-    return fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    }).then(r => r.json()).then(data => {
-      if (!data || data.ok === false) console.warn('Backend error:', data && data.error);
-      return data;
-    }).catch(err => { console.warn('Backend save failed:', err); return null; });
-  }
-
-  // ===== TOAST =====
-  function showToast(msg, icon = '✅') {
-    const toast = document.getElementById('toast');
-    const iconEl = toast.querySelector('i');
-    if (iconEl) {
-      iconEl.className = icon === '⚠️'
-        ? 'fa-solid fa-triangle-exclamation text-amber-400'
-        : icon === '🔄'
-          ? 'fa-solid fa-rotate text-blue-300'
-          : 'fa-solid fa-circle-check text-green-400';
-    }
-    document.getElementById('toastMsg').textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-  }
-
-  // ===== DYNAMIC VENDOR LOADING =====
-  async function loadVendors() {
-    const grid = document.getElementById('directoryGrid');
-    const empty = document.getElementById('emptyState');
-    const counter = document.getElementById('counterNumber');
-    const liveCount = document.getElementById('liveCount');
-
-    // Render helper — shared by live fetch and cached fallback, so behaviour is identical either way
-    function renderVendors(vendors, fromCache) {
-      const approved = vendors.filter(v => v && v.bizName && String(v.status || '').trim().toLowerCase() === 'approved');
-
-      if (approved.length === 0) {
-        grid.innerHTML = '';
-        empty.classList.remove('hidden');
-        counter.textContent = '0';
-        liveCount.textContent = '0';
-        return;
-      }
-
-      empty.classList.add('hidden');
-      let html = '';
-      approved.forEach(v => {
-        const phone = v.phone || '';
-        const district = v.city || 'Hyderabad';
-        const area = v.area || '';
-        const items = v.items || '';
-        // Real rating/review fields come from the sheet (populated once you have actual
-        // reviews). Until then we show a "New" badge instead of a fabricated number —
-        // never invent a rating or review count client-side.
-        const hasRating = v.avgRating !== undefined && v.avgRating !== '' && Number(v.reviewCount) > 0;
-        const ratingBadge = hasRating
-          ? `<span class="inv-tag" style="background:#fffbeb;border-color:#fde68a;color:#92400e"><i class="fa-solid fa-star text-amber-500"></i> ${Number(v.avgRating).toFixed(1)} (${v.reviewCount})</span>`
-          : `<span class="inv-tag" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">New on TentWala</span>`;
-
-        html += `
-          <div class="vendor-card bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 hover:border-orange-300 hover:shadow-md transition shadow-sm flex flex-wrap items-start justify-between gap-4" data-district="${district}">
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2 flex-wrap mb-1">
-                <span class="badge-live"><i class="fa-solid fa-circle-check"></i> Verified</span>
-                <span class="inv-tag" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">${area || 'Hyderabad'}</span>
-              </div>
-              <h4 class="text-lg font-bold text-slate-900"><i class="fa-solid fa-location-dot text-red-500 mr-1.5"></i>${v.bizName}</h4>
-              <p class="text-sm text-slate-500">${area}${district ? ', ' + district : ''}</p>
-              <div class="flex flex-wrap gap-1.5 mt-2">
-                ${ratingBadge}
-                <span class="inv-tag">Tent House Supplier</span>
-              </div>
-              <p class="text-xs text-slate-500 italic mt-2">${items ? items.substring(0, 60) + (items.length > 60 ? '…' : '') : ''}</p>
-            </div>
-            <div class="flex flex-col gap-2 items-end">
-              <a href="tel:${phone}" class="btn-green text-sm px-5 py-2.5 rounded-xl shadow-sm whitespace-nowrap">
-                <i class="fa-solid fa-phone"></i> Call Now
-              </a>
-              <a href="https://wa.me/${phone}?text=Hi%2C%20I%20saw%20your%20listing%20on%20TentWala.%20I%20need%20a%20quote%20for%20my%20event." target="_blank" class="text-xs font-semibold text-green-700 flex items-center gap-1 hover:underline">
-                <i class="fa-brands fa-whatsapp"></i> WhatsApp
-              </a>
-              <button class="view-detail-btn text-xs font-medium text-blue-600 hover:underline mt-1" 
-                data-name="${v.bizName}" 
-                data-address="${area}${district ? ', ' + district : ''}" 
-                data-phone="${phone}" 
-                data-items="${items}" 
-                data-district="${district}"
-                data-rating="${hasRating ? Number(v.avgRating).toFixed(1) : ''}"
-                data-reviews="${hasRating ? v.reviewCount : ''}">View Details</button>
-            </div>
-          </div>
-        `;
-      });
-
-      grid.innerHTML = html;
-      counter.textContent = approved.length;
-      liveCount.textContent = approved.length;
-
-      attachViewDetailListeners();
-      applyFilters();
-
-      if (!fromCache) {
-        try { localStorage.setItem('tw_vendor_cache', JSON.stringify({ ts: Date.now(), vendors })); } catch (e) {}
-      }
-    }
-
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 8000);
-      const res = await fetch(GOOGLE_SCRIPT_URL, { signal: controller.signal });
-      clearTimeout(timeout);
-      const vendors = await res.json();
-
-      if (!vendors || !Array.isArray(vendors)) throw new Error('Malformed response');
-      renderVendors(vendors, false);
-
-    } catch (err) {
-      console.error('Failed to load vendors, trying cache:', err);
-      // Fall back to last known-good data instead of showing a bare "0" to a visitor
-      try {
-        const cached = JSON.parse(localStorage.getItem('tw_vendor_cache') || 'null');
-        if (cached && Array.isArray(cached.vendors) && cached.vendors.length) {
-          renderVendors(cached.vendors, true);
-          showToast('Showing recently saved listings — live refresh failed.', '⚠️');
-          return;
-        }
-      } catch (e2) {}
-      grid.innerHTML = `<p class="text-center text-red-500 py-8">Could not load vendors. Please refresh the page, or <a href="https://wa.me/919948680017" class="underline">WhatsApp us</a> directly.</p>`;
-    }
-  }
-
-  // ===== VIEW DETAIL LISTENERS =====
-  function attachViewDetailListeners() {
-    document.querySelectorAll('.view-detail-btn').forEach(btn => {
-      btn.removeEventListener('click', handleViewDetail);
-      btn.addEventListener('click', handleViewDetail);
-    });
-  }
-
-  function handleViewDetail(e) {
-    e.stopPropagation();
-    const btn = e.currentTarget;
-    const name = btn.dataset.name || 'Vendor';
-    const address = btn.dataset.address || '';
-    const phone = btn.dataset.phone || '';
-    const items = btn.dataset.items || '';
-    const district = btn.dataset.district || 'Hyderabad';
-    const hasRealReviews = !!btn.dataset.rating;
-    const displayRating = btn.dataset.rating;
-    const displayReviewCount = btn.dataset.reviews;
-    // NOTE: quantities and prices are NOT fabricated. We only know what the vendor
-    // typed at onboarding (item names, and free-text qty if they included it). Exact
-    // availability and pricing are confirmed live with the vendor via Call/WhatsApp —
-    // never invented client-side.
-    const itemList = items.split(',').map(s => s.trim()).filter(Boolean);
-    let inventoryItems = itemList.map((item, idx) => {
-      const category = item.toLowerCase().includes('tent') ? 'tents' :
-        item.toLowerCase().includes('chair') ? 'chairs' :
-        item.toLowerCase().includes('table') ? 'tables' :
-        item.toLowerCase().includes('light') ? 'lighting' :
-        item.toLowerCase().includes('sound') ? 'sound' :
-        item.toLowerCase().includes('stage') ? 'stage' : 'decor';
-      return { id: idx+1, name: item, category, unit: 'day', description: '' };
-    });
-    window._inventoryItems = inventoryItems;
-    const itemsHTML = inventoryItems.map(item =>
-      `<span class="inv-tag">${item.name}</span>`
-    ).join('');
-
-    const modalHtml = `
-      <div class="mb-4">
-        <h2 class="text-2xl font-bold text-slate-900">${name}</h2>
-        <p class="text-sm text-slate-500"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${address}</p>
-        <p class="text-sm text-slate-500"><i class="fa-solid fa-phone mr-1"></i>${phone}</p>
-        <div class="flex flex-wrap gap-1.5 mt-2">${itemsHTML}</div>
-      </div>
-
-      <!-- Tabs -->
-      <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-2 mb-4">
-        <button class="vendor-tab-btn active" data-tab="inventory">📦 Inventory</button>
-        <button class="vendor-tab-btn" data-tab="booking">📝 Enquiry & Book</button>
-        <button class="vendor-tab-btn" data-tab="reviews">⭐ Reviews</button>
-      </div>
-
-      <!-- Inventory Tab -->
-      <div id="vendorTab-inventory" class="vendor-tab-content active">
-        <p class="text-xs text-slate-400 mb-3">Items as listed by the vendor. Exact quantity, condition and pricing are confirmed live — tap Call or WhatsApp above.</p>
-        <div id="inventoryGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          ${inventoryItems.map(item => `
-            <div class="inventory-card bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-              <h4 class="font-bold text-slate-900">${item.name}</h4>
-              <p class="text-sm text-slate-500">Category: ${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
-              <button class="mt-2 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-1 px-3 rounded-lg transition" onclick="document.getElementById('vendorTab-booking').scrollIntoView({behavior:'smooth'})">
-                <i class="fa-regular fa-calendar-plus"></i> Enquire
-              </button>
-            </div>
-          `).join('') || '<p class="text-sm text-slate-500 col-span-2">No itemized inventory listed yet — ask the vendor directly.</p>'}
-        </div>
-      </div>
-
-      <!-- Booking / Enquiry Tab -->
-      <div id="vendorTab-booking" class="vendor-tab-content hidden">
-        <p class="text-xs text-slate-400 mb-3">This goes straight to the vendor via WhatsApp. Pricing and availability are confirmed by them, not estimated by us.</p>
-        <form id="bookingForm" class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Full Name *</label>
-              <input type="text" id="bookName" required placeholder="Your name" class="form-input" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Phone *</label>
-              <input type="tel" id="bookPhone" required placeholder="10-digit mobile" class="form-input" />
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Event Name</label>
-            <input type="text" id="bookEvent" placeholder="e.g., Gupta Wedding" class="form-input" />
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Event Date *</label>
-              <input type="date" id="bookDate" required class="form-input" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Guest Count *</label>
-              <select id="bookGuestCount" required class="form-input">
-                <option value="50-100">50 — 100 Pax</option>
-                <option value="100-300" selected>100 — 300 Pax</option>
-                <option value="300-500">300 — 500 Pax</option>
-                <option value="500+">500+ Pax</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Event Type</label>
-            <select id="bookEventType" class="form-input">
-              <option value="Wedding">Wedding</option>
-              <option value="Birthday">Birthday</option>
-              <option value="Corporate">Corporate Event</option>
-              <option value="Religious">Religious Gathering</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Additional Requirements</label>
-            <textarea id="bookNotes" rows="2" placeholder="Any special requirements..." class="form-input resize-none"></textarea>
-          </div>
-          <button type="submit" class="btn-saffron w-full py-3 text-sm rounded-xl">
-            <i class="fa-solid fa-paper-plane"></i> Send Enquiry to Vendor
-          </button>
-        </form>
-        <div id="bookingFeedback" class="mt-3 text-sm font-medium text-center hidden"></div>
-      </div>
-
-      <!-- Reviews Tab -->
-      <div id="vendorTab-reviews" class="vendor-tab-content hidden">
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <h3 class="font-bold text-slate-800">⭐ Reviews</h3>
-            <span class="text-sm text-slate-500">${hasRealReviews ? displayRating + ' (' + displayReviewCount + ')' : 'No reviews yet'}</span>
-          </div>
-          <p class="text-sm text-slate-500">This vendor is newly onboarded — be the first customer to book and leave a review.</p>
-          <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-4 py-2 rounded-xl transition text-sm">Write a Review</button>
-        </div>
-      </div>
-    `;
-    openModal(modalHtml, phone, name);
-  }
-
-  // ===== VENDOR DETAIL MODAL =====
-  const modalOverlay = document.getElementById('vendorModal');
-  const modalBody = document.getElementById('modalBody');
-  const modalClose = document.getElementById('modalClose');
-
-  function openModal(html, vendorPhone, vendorName) {
-    modalBody.innerHTML = html;
-    modalOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    document.querySelectorAll('.vendor-tab-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const tabId = this.dataset.tab;
-        document.querySelectorAll('.vendor-tab-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        document.querySelectorAll('.vendor-tab-content').forEach(c => c.classList.remove('active'));
-        const content = document.getElementById('vendorTab-' + tabId);
-        if (content) content.classList.add('active');
-      });
-    });
-    const bookingForm = document.getElementById('bookingForm');
-    if (bookingForm) {
-      bookingForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('bookName').value.trim();
-        const phone = document.getElementById('bookPhone').value.trim();
-        const date = document.getElementById('bookDate').value;
-        const eventName = document.getElementById('bookEvent').value.trim();
-        const guestCount = document.getElementById('bookGuestCount').value;
-        const eventType = document.getElementById('bookEventType').value;
-        const notes = document.getElementById('bookNotes').value.trim();
-        if (!name || !phone || !date) { alert('Please fill required fields.'); return; }
-
-        // Actually send it — to the vendor's own WhatsApp if we have their number,
-        // and log it to the backend so it's not lost if the tab closes before
-        // WhatsApp opens.
-        const msg = `📋 *New Enquiry via TentWala*\n\n` +
-          `*Vendor:* ${vendorName || ''}\n*Name:* ${name}\n*Phone:* ${phone}\n` +
-          (eventName ? `*Event:* ${eventName}\n` : '') +
-          `*Date:* ${date}\n*Guests:* ${guestCount}\n*Type:* ${eventType}\n` +
-          (notes ? `*Notes:* ${notes}\n` : '') +
-          `\n_Sent via TentWala vendor enquiry form._`;
-        const target = vendorPhone ? vendorPhone.replace(/\D/g, '') : '919948680017';
-        window.open(`https://wa.me/${target}?text=${encodeURIComponent(msg)}`, '_blank');
-        postToBackend({ type: 'enquiry', name, phone, date, size: guestCount, area: vendorName || '', needs: `${eventType}${notes ? ' — ' + notes : ''}`, subtype: 'vendor-direct' });
-
-        const feedback = document.getElementById('bookingFeedback');
-        feedback.className = 'text-sm font-medium text-center block text-emerald-600 mt-3';
-        feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Thank you, ${name}! Your enquiry has been sent — the vendor will confirm availability and pricing directly.`;
-        feedback.classList.remove('hidden');
-        bookingForm.reset();
-        showToast('✅ Enquiry sent!');
-      });
-    }
-  }
-
-  function closeModal() {
-    modalOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  modalClose.addEventListener('click', closeModal);
-  modalOverlay.addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // ============================================================
-  // CHATBOT
-  // ============================================================
-  const chatToggle = document.getElementById('chatToggle');
-  const chatWidget = document.getElementById('chatWidget');
-  const chatClose = document.getElementById('chatClose');
-  const chatInput = document.getElementById('chatInput');
-  const chatSend = document.getElementById('chatSend');
-  const chatMessages = document.getElementById('chatMessages');
-
-  chatToggle.addEventListener('click', () => {
-    chatWidget.classList.toggle('open');
-    chatToggle.style.display = chatWidget.classList.contains('open') ? 'none' : 'flex';
-  });
-  chatClose.addEventListener('click', () => {
-    chatWidget.classList.remove('open');
-    chatToggle.style.display = 'flex';
-  });
-
-  function sendChatMessage() {
-    const query = chatInput.value.trim();
-    if (!query) return;
-    chatMessages.innerHTML += `<div class="chat-message user">${query}</div>`;
-    chatInput.value = '';
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    setTimeout(() => {
-      let response = '';
-      const lower = query.toLowerCase();
-      if (lower.includes('chair') || lower.includes('seat')) {
-        response = 'We have a variety of chairs available. Check the inventory tab for details.';
-      } else if (lower.includes('canopy') || lower.includes('tent')) {
-        response = 'Our canopies are sturdy and waterproof. Check inventory for availability.';
-      } else if (lower.includes('price') || lower.includes('cost')) {
-        response = 'Pricing varies by item. Please use the booking form for a custom quote.';
-      } else if (lower.includes('available') || lower.includes('book')) {
-        response = 'Use the "Enquiry & Book" tab on any vendor to check availability directly with them.';
-      } else {
-        response = "I'm here to help! Ask me about inventory, pricing, or availability.";
-      }
-      chatMessages.innerHTML += `<div class="chat-message bot">${response}</div>`;
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 600);
-  }
-
-  chatSend.addEventListener('click', sendChatMessage);
-  chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendChatMessage(); });
-
-  // ============================================================
-  // SOP TABS
-  // ============================================================
-  document.querySelectorAll('.sop-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.sop-tab').forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-      document.querySelectorAll('.sop-content').forEach(c => c.classList.remove('active'));
-      const target = this.dataset.target;
-      const content = document.getElementById('sop-' + target);
-      if (content) content.classList.add('active');
-    });
-  });
-
-  // ============================================================
-  // INVENTORY CALCULATOR (from inventory guide)
-  // ============================================================
-  window.updateCalc = function() {
-    const guests = parseInt(document.getElementById('guestSlider').value);
-    document.getElementById('guestValue').textContent = guests;
-    document.getElementById('chairs').textContent = Math.ceil(guests * 1.1);
-    document.getElementById('tables').textContent = Math.ceil(guests / 6);
-    document.getElementById('tentArea').textContent = (guests * 15).toLocaleString();
-    document.getElementById('lights').textContent = Math.ceil(guests / 4);
-    document.getElementById('power').textContent = Math.ceil(guests * 50 / 1000);
-    document.getElementById('labour').textContent = Math.max(2, Math.ceil(guests / 25));
-  };
-  // Initialize calculator
-  setTimeout(updateCalc, 100);
-
-  // ============================================================
-  // VENDOR FORM SUBMIT (WhatsApp + backend)
-  // ============================================================
-  window.submitVendorForm = function(e) {
-    e.preventDefault();
-    const bizName = document.getElementById('vBizName').value.trim();
-    const city = document.getElementById('vCity').value.trim();
-    const area = document.getElementById('vArea').value.trim();
-    const pin = document.getElementById('vPin').value.trim();
-    const phone = document.getElementById('vPhone').value.trim();
-    const items = document.getElementById('vItems').value.trim();
-    const extra = document.getElementById('vExtra').value.trim();
-    const img1 = document.getElementById('vImg1').value.trim();
-    const img2 = document.getElementById('vImg2').value.trim();
-    const img3 = document.getElementById('vImg3').value.trim();
-    const folderURL = document.getElementById('vDriveFolder').value.trim();
-
-    if (!bizName || !city || !area || !pin || !phone || !items) {
-      alert('Please fill all required fields.'); return;
-    }
-
-    const msg = `🏕️ *New TentWala Vendor Onboarding*\n\n` +
-      `*Business:* ${bizName}\n*City/District:* ${city}\n*Area/Locality:* ${area}\n*PIN Code:* ${pin}\n*Phone/WhatsApp:* ${phone}\n*Items & Qty:* ${items}\n` +
-      (extra ? `*Additional Info:* ${extra}\n` : '') +
-      `\n_Please verify and add to the live grid._`;
-
-    window.open(`https://wa.me/919948680017?text=${encodeURIComponent(msg)}`, '_blank');
-
-    postToBackend({ type: 'vendor', bizName, city, area, pin, phone, items, extra, driveFolder: folderURL, img1, img2, img3 })
-      .then(result => {
-        if (backendEnabled() && (!result || result.ok === false)) {
-          showToast('Sent to WhatsApp, but Sheet save failed — our team will add you manually.', '⚠️');
-        }
-        setTimeout(loadVendors, 3000);
-      });
-
-    document.getElementById('vendorForm').reset();
-    showToast(backendEnabled() ? 'Submitted! Saved for review and sent to WhatsApp.' : 'Submitted! Opening WhatsApp.');
-  };
-
-  // ============================================================
-  // ENQUIRY FORM (WhatsApp + backend)
-  // ============================================================
-  window.submitEnquiry = function(e) {
-    e.preventDefault();
-    const name = document.getElementById('enqName').value.trim();
-    const phone = document.getElementById('enqPhone').value.trim();
-    const date = document.getElementById('enqDate').value;
-    const size = document.getElementById('enqSize').value;
-    const area = document.getElementById('enqArea').value.trim();
-    const needs = document.getElementById('enqNeeds').value.trim();
-
-    if (!name || !phone || !date || !area) { alert('Please fill required fields.'); return; }
-
-    const msg = `📋 *TentWala Event Enquiry*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event Date:* ${date}\n*Guest Count:* ${size}\n*Location:* ${area}\n` +
-      (needs ? `*Requirements:* ${needs}\n` : '') +
-      `\n_Please match with a suitable vendor and call back._`;
-
-    window.open(`https://wa.me/919948680017?text=${encodeURIComponent(msg)}`, '_blank');
-
-    postToBackend({ type: 'enquiry', name, phone, date, size, area, needs, subtype: 'whatsapp' });
-
-    document.getElementById('enquiryForm').reset();
-    const fb = document.getElementById('enquiryFeedback');
-    fb.className = 'text-sm font-medium text-center py-3 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200';
-    fb.textContent = `✅ Thank you ${name}! Your enquiry is going to our WhatsApp ops line. We'll call you at ${phone} shortly.`;
-    fb.classList.remove('hidden');
-    setTimeout(() => fb.classList.add('hidden'), 8000);
-  };
-
-  window.submitEnquiryCallback = function() {
-    const name = document.getElementById('enqName').value.trim();
-    const phone = document.getElementById('enqPhone').value.trim();
-    if (!name || !phone) { alert('Please fill your name and phone number.'); return; }
-    const date = document.getElementById('enqDate').value;
-    const size = document.getElementById('enqSize').value;
-    const area = document.getElementById('enqArea').value.trim();
-    const needs = document.getElementById('enqNeeds').value.trim();
-
-    postToBackend({ type: 'enquiry', name, phone, date, size, area, needs, subtype: 'callback' });
-
-    const fb = document.getElementById('enquiryFeedback');
-    fb.className = 'text-sm font-medium text-center py-3 rounded-xl bg-blue-50 text-blue-700 border border-blue-200';
-    fb.textContent = `📞 Got it, ${name}! Our team will call ${phone} within 15 minutes.`;
-    fb.classList.remove('hidden');
-    showToast('Callback request logged! We will reach you at ' + phone);
-    setTimeout(() => fb.classList.add('hidden'), 8000);
-  };
-
-  // ============================================================
-  // SHARE
-  // ============================================================
-  window.shareApp = function() {
-    const data = { title: 'TentWala – Hyderabad Tent House Network', text: 'Find verified tent houses, chairs, sound systems & more for your event in Hyderabad!', url: window.location.href };
-    if (navigator.share) { navigator.share(data); }
-    else {
-      navigator.clipboard.writeText(window.location.href).then(() => showToast('Link copied! Share with tent house owners near you.'));
-    }
-  };
-
-  // ============================================================
-  // GEOLOCATION & FILTERS
-  // ============================================================
-  const locationStatus = document.getElementById('locationStatus');
-  const localToggle = document.getElementById('localToggle');
-  const allToggle = document.getElementById('allToggle');
-  const searchInput = document.getElementById('searchInput');
-  const directory = document.getElementById('directoryGrid');
-  const counterSpan = document.getElementById('counterNumber');
-  const liveCount = document.getElementById('liveCount');
-  const emptyState = document.getElementById('emptyState');
-
-  let userDistrict = null;
-  let currentFilter = 'local';
-  let searchTerm = '';
-
-  function applyFilters() {
-    const cards = directory.querySelectorAll('.vendor-card');
-    let vis = 0;
-    cards.forEach(card => {
-      const dist = (card.dataset.district || '').toLowerCase();
-      const matchDist = currentFilter === 'all' || !userDistrict || dist === userDistrict.toLowerCase();
-      const text = card.textContent.toLowerCase();
-      const matchSearch = !searchTerm || text.includes(searchTerm.toLowerCase());
-      if (matchDist && matchSearch) {
-        card.classList.remove('hidden-card');
-        vis++;
-      } else {
-        card.classList.add('hidden-card');
-      }
-    });
-    counterSpan.textContent = vis;
-    liveCount.textContent = vis;
-    if (emptyState) emptyState.classList.toggle('hidden', vis > 0);
-  }
-
-  function setFilter(mode) {
-    currentFilter = mode;
-    localToggle.classList.toggle('active', mode === 'local');
-    allToggle.classList.toggle('active', mode === 'all');
-    applyFilters();
-  }
-
-  localToggle.addEventListener('click', () => setFilter('local'));
-  allToggle.addEventListener('click', () => setFilter('all'));
-  searchInput.addEventListener('input', e => { searchTerm = e.target.value.trim(); applyFilters(); });
-
-  function detectLocation() {
-    if (!navigator.geolocation) {
-      locationStatus.textContent = 'Showing all Hyderabad vendors.';
-      userDistrict = null; applyFilters(); return;
-    }
-    locationStatus.textContent = 'Detecting your area...';
-    navigator.geolocation.getCurrentPosition(async pos => {
-      const { latitude, longitude } = pos.coords;
-      try {
-        const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`);
-        const d = await r.json();
-        const a = d.address || {};
-        let dist = a.state_district || a.city || a.county || a.town || a.village || a.state || '';
-        userDistrict = dist;
-        locationStatus.innerHTML = `You're in <strong>${dist || 'your area'}</strong>`;
-        const vCity = document.getElementById('vCity');
-        if (vCity && dist) vCity.value = dist;
-        applyFilters();
-      } catch (err) {
-        locationStatus.textContent = 'Could not detect area. Showing all.';
-        userDistrict = null; applyFilters();
-      }
-    }, () => {
-      locationStatus.textContent = 'Location unavailable. Showing all.';
-      userDistrict = null; applyFilters();
-    }, { timeout: 15000 });
-  }
-
-  // ============================================================
-  // INIT
-  // ============================================================
-  detectLocation();
-  setFilter('all');
-  loadVendors();
-
-  // Highlight active nav link on scroll
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 80;
-      if (window.scrollY >= sectionTop) {
-        current = section.getAttribute('id');
-      }
-    });
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
-      }
-    });
-  });
-
-  console.log('🏕️ TentWala with Inventory Guide and prominent navigation.');
-})();
-</script>
-
-<script>
-(function(){
-'use strict';
-const EP_BACKEND='https://script.google.com/macros/s/AKfycbwVshavTK1yv5gBqvs--6gep0NdbJsbx4nEWmjyJy6sJWdGwAaeLC4y6pFpo4slxgWu6w/exec';
-const venues=[
-{id:'V001',name:'Sri Lakshmi Convention Hall',locality:'Kukatpally',type:'Convention Centre',capacity:800,rating:4.6,verified:true,emoji:'🏛️',venuePrice:75000,facilities:['AC','Parking','Stage','Generator','Kitchen'],packages:[
-{id:'P001',name:'Venue Only',type:'venue',price:75000,min:100,max:800,inclusions:['Main hall','Basic tables & chairs','Parking','Stage']},
-{id:'P002',name:'Venue + Catering',type:'combo',price:195000,min:300,max:600,inclusions:['Venue','Standard catering','Dining setup','Service staff']},
-{id:'P003',name:'Wedding Premium',type:'combo',price:275000,min:300,max:800,inclusions:['Venue','Premium catering','Basic stage decor','Dining setup','Service staff']}]},
-{id:'V002',name:'Green Leaf Banquet',locality:'Gachibowli',type:'Banquet Hall',capacity:500,rating:4.5,verified:true,emoji:'🌿',venuePrice:65000,facilities:['AC','Parking','Stage','Generator'],packages:[
-{id:'P004',name:'Venue Only',type:'venue',price:65000,min:100,max:500,inclusions:['Banquet hall','Tables & chairs','Parking']},
-{id:'P005',name:'Venue + Catering',type:'combo',price:215000,min:250,max:500,inclusions:['Venue','Multi-cuisine catering','Dining service','Basic lighting']}]},
-{id:'V003',name:'Royal Pearl Function Hall',locality:'LB Nagar',type:'Function Hall',capacity:700,rating:4.4,verified:true,emoji:'✨',venuePrice:55000,facilities:['AC','Parking','Kitchen','Stage'],packages:[
-{id:'P006',name:'Venue Only',type:'venue',price:55000,min:100,max:700,inclusions:['Hall','Basic seating','Stage','Parking']}]},
-{id:'V004',name:'Hyderabad Grand Grounds',locality:'Medchal',type:'Outdoor',capacity:2000,rating:4.3,verified:true,emoji:'🎪',venuePrice:90000,facilities:['Large Parking','Open Ground','Generator','Stage Area'],packages:[
-{id:'P007',name:'Outdoor Venue Only',type:'venue',price:90000,min:300,max:2000,inclusions:['Ground','Basic power point','Parking area']}]}
-];
-const caterers=[
-{id:'C001',name:'Andhra Ruchulu Catering',locality:'Kukatpally',cuisine:'Andhra',foodType:'Veg + Non-Veg',price:450,min:100,max:1500,rating:4.7,verified:true,emoji:'🍛'},
-{id:'C002',name:'Sri Sai Pure Veg Caterers',locality:'Miyapur',cuisine:'South Indian',foodType:'Pure Vegetarian',price:350,min:50,max:1000,rating:4.5,verified:true,emoji:'🥗'},
-{id:'C003',name:'Deccan Feast Events Catering',locality:'Gachibowli',cuisine:'Multi-Cuisine',foodType:'Veg + Non-Veg',price:550,min:150,max:2000,rating:4.6,verified:true,emoji:'🍽️'},
-{id:'C004',name:'Telangana Bhojanam Caterers',locality:'LB Nagar',cuisine:'Telangana',foodType:'Non-Vegetarian',price:500,min:100,max:1200,rating:4.4,verified:false,emoji:'🍲'}
-];
-let eventPlan=null;
-const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const money=n=>Number.isFinite(Number(n))?'₹'+Number(n).toLocaleString('en-IN'):'Contact for pricing';
-const toast=m=>{let e=document.getElementById('epToast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2500)};
-function ensure(){if(!eventPlan)eventPlan={eventId:'CT-EVT-'+String(Date.now()).slice(-6),eventType:'Wedding',date:'',guests:200,budget:500000,location:'',food:'Veg + Non-Veg',venueType:'Any',venue:null,package:null,caterer:null};return eventPlan}
-function save(){try{localStorage.setItem('cloudtento_event_plan',JSON.stringify(eventPlan))}catch(e){}}
-function restore(){try{let x=JSON.parse(localStorage.getItem('cloudtento_event_plan')||'null');if(x)eventPlan=x}catch(e){}}
-function show(id,step){document.querySelectorAll('.ep-panel').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');for(let i=1;i<=5;i++)document.getElementById('epStep'+i).classList.toggle('active',i===step)}
-window.openEventSetup=()=>{let p=ensure();document.getElementById('epEventType').value=p.eventType;document.getElementById('epEventDate').value=p.date;document.getElementById('epGuests').value=p.guests;document.getElementById('epBudget').value=p.budget;document.getElementById('epLocation').value=p.location;document.getElementById('epFood').value=p.food;document.getElementById('epVenueType').value=p.venueType;show('epSetupPanel',1)}
-window.openEventPlanner=()=>{document.getElementById('event-planner').scrollIntoView({behavior:'smooth'});setTimeout(openEventSetup,300)}
-window.startEventPlan=()=>{let p=ensure();p.eventType=epEventType.value;p.date=epEventDate.value;p.guests=+epGuests.value||200;p.budget=+epBudget.value||0;p.location=epLocation.value.trim();p.food=epFood.value;p.venueType=epVenueType.value;if(!p.date||!p.location)return alert('Please enter event date and location.');save();renderVenues();show('epVenuePanel',2)}
-window.loadSavedEvent=()=>{restore();if(eventPlan){openEventSetup();toast('Saved event restored.')}else toast('No saved event found.')}
-window.renderVenues=()=>{let p=ensure(),q=(epVenueSearch.value||'').toLowerCase(),cap=+epVenueCapacity.value,pf=epVenuePackageFilter.value;let list=venues.filter(v=>(!q||(v.name+' '+v.locality+' '+v.type).toLowerCase().includes(q))&&(!cap||v.capacity>=cap)&&v.capacity>=p.guests&&(p.venueType==='Any'||v.type===p.venueType)&&(pf==='all'||(pf==='combo'&&v.packages.some(x=>x.type==='combo'))||(pf==='venue'&&v.packages.some(x=>x.type==='venue'))));epVenueContext.textContent=`${p.eventType} · ${p.guests} guests · ${p.location} · ${p.date}`;epSumEvent.textContent=p.eventType;epSumGuests.textContent=p.guests;epSumVenue.textContent=p.venue?.name||'None';epVenueGrid.innerHTML=list.length?list.map(v=>`<article class="ep-card"><div class="ep-card-media">${v.emoji}</div><div class="ep-card-body"><div class="flex flex-wrap gap-1"><span class="ep-pill">${esc(v.type)}</span><span class="ep-pill">${v.capacity}+ guests</span>${v.verified?'<span class="ep-pill" style="color:#166534;background:#dcfce7">✓ Verified</span>':''}</div><h4 class="font-bold mt-2">${esc(v.name)}</h4><p class="ep-muted"><i class="fa-solid fa-location-dot text-red-500"></i> ${esc(v.locality)}, Hyderabad</p><p class="text-xs mt-2">⭐ ${v.rating} · ${v.facilities.slice(0,3).join(' · ')}</p><div class="mt-3"><span class="ep-price">${money(v.venuePrice)}</span> <span class="ep-muted">venue onwards</span></div>${v.packages.some(x=>x.type==='combo')?'<div class="mt-2 text-xs text-orange-700 bg-orange-50 rounded-lg p-2"><strong>Combo:</strong> Venue + Catering available</div>':''}<div class="flex gap-2 mt-4"><button class="ep-btn ep-btn-secondary flex-1" onclick="openVenueDetails('${v.id}')">View</button><button class="ep-btn ep-btn-primary flex-1" onclick="selectVenue('${v.id}')">Select</button></div></div></article>`).join(''):'<div class="ep-empty">No matching venues. Try another capacity or venue type.</div>'}
-window.openVenueDetails=id=>{let v=venues.find(x=>x.id===id);epModalKicker.textContent='Venue';epModalTitle.textContent=v.name;epModalBody.innerHTML=`<p class="text-sm text-slate-600">${esc(v.locality)}, Hyderabad · ${v.capacity}+ guests · ⭐ ${v.rating}</p><h4 class="font-bold mt-5">Facilities</h4><div class="flex flex-wrap gap-2 mt-2">${v.facilities.map(x=>`<span class="ep-pill">${esc(x)}</span>`).join('')}</div><h4 class="font-bold mt-6 mb-3">Packages</h4>${v.packages.map(x=>`<div class="ep-package mb-3"><div class="text-xs font-black uppercase text-orange-700">${x.type==='combo'?'Venue + Catering':'Venue Only'}</div><div class="font-bold mt-1">${esc(x.name)}</div><div class="ep-price mt-2">${money(x.price)}</div><div class="text-xs text-slate-500">${x.min}–${x.max} guests</div><div class="mt-2">${x.inclusions.map(i=>`<div class="ep-check"><i class="fa-solid fa-check"></i>${esc(i)}</div>`).join('')}</div></div>`).join('')}<button class="ep-btn ep-btn-primary w-full mt-3" onclick="selectVenue('${v.id}');closeEPModal()">Select Venue</button>`;epModal.classList.add('open')}
-window.closeEPModal=()=>epModal.classList.remove('open');
-window.selectVenue=id=>{let p=ensure(),v=venues.find(x=>x.id===id);p.venue=v;p.package=null;p.caterer=null;save();toast(v.name+' selected');renderVenues();renderCaterers()}
-window.goToCatering=()=>{if(!ensure().venue)return toast('Select a venue first');renderCatering();show('epCateringPanel',3)}
-function renderCatering(){let p=ensure(),v=p.venue;epComboArea.innerHTML=v?`<div class="bg-orange-50 border border-orange-200 rounded-2xl p-5"><div class="text-xs font-black uppercase text-orange-700">Selected venue</div><h4 class="font-bold mt-1">${esc(v.name)}</h4><div class="grid md:grid-cols-2 gap-3 mt-4">${v.packages.filter(x=>x.type==='combo').map(x=>`<div class="ep-package ${p.package?.id===x.id?'selected':''}" onclick="selectVenuePackage('${x.id}')"><div class="ep-package-tag">Venue + Catering</div><div class="font-bold mt-1">${esc(x.name)}</div><div class="ep-price mt-2">${money(x.price)}</div><div class="text-xs text-slate-500">${x.min}–${x.max} guests</div><div class="mt-2">${x.inclusions.map(i=>`<div class="ep-check"><i class="fa-solid fa-check"></i>${esc(i)}</div>`).join('')}</div></div>`).join('')||'<div class="ep-empty md:col-span-2">No bundled catering package advertised for this venue.</div>'}</div></div>`:'';renderCaterers();updateSummary()}
-window.selectVenuePackage=id=>{let p=ensure();p.package=p.venue.packages.find(x=>x.id===id)||null;p.caterer=p.package?{name:'Catering included in package'}:null;save();renderCatering();toast('Venue + catering package selected')}
-window.chooseIndependentCatering=()=>{let p=ensure();p.package=null;p.caterer=null;save();renderCatering();toast('Independent catering mode selected')}
-window.renderCaterers=()=>{let p=ensure(),q=(epCaterSearch.value||'').toLowerCase(),cu=epCuisine.value,fo=epFoodFilter.value;let list=caterers.filter(c=>c.min<=p.guests&&c.max>=p.guests&&(!q||(c.name+' '+c.locality+' '+c.cuisine).toLowerCase().includes(q))&&(cu==='all'||c.cuisine===cu)&&(fo==='all'||c.foodType===fo));epCatererGrid.innerHTML=list.map(c=>`<article class="ep-card"><div class="ep-card-media">${c.emoji}</div><div class="ep-card-body"><div class="flex flex-wrap gap-1"><span class="ep-pill">${esc(c.cuisine)}</span><span class="ep-pill">${esc(c.foodType)}</span></div><h4 class="font-bold mt-2">${esc(c.name)}</h4><p class="ep-muted">${esc(c.locality)}, Hyderabad</p><div class="mt-3"><span class="ep-price">${money(c.price)}</span> <span class="ep-muted">/ plate</span></div><p class="text-xs mt-1">⭐ ${c.rating} · ${c.min}–${c.max} guests</p><div class="flex gap-2 mt-4"><button class="ep-btn ep-btn-primary flex-1" onclick="selectCaterer('${c.id}')">Select</button></div></div></article>`).join('')||'<div class="ep-empty">No independent caterers match your filters.</div>'}
-window.selectCaterer=id=>{let p=ensure();p.package=null;p.caterer=caterers.find(x=>x.id===id)||null;save();updateSummary();toast('Caterer selected')}
-function total(){let p=ensure();if(p.package)return p.package.price;return (p.venue?.venuePrice||0)+(p.caterer?(p.caterer.price||0)*p.guests:0)}
-function updateSummary(){let p=ensure();epSumVenue2.textContent=p.venue?.name||'None';epSumCaterer.textContent=p.package?'Included in venue package':p.caterer?.name||'None';epSumTotal.textContent=money(total())}
-window.openMyEvent=()=>{if(!ensure().venue)return toast('Select a venue first');let p=ensure(),t=total(),b=p.budget;epMyEventName.textContent=p.eventType+' · '+p.location;epMyEventMeta.textContent=p.date+' · '+p.guests+' guests · '+p.food;epEventId.textContent=p.eventId;epSelections.innerHTML=`<div class="ep-selected-row"><div><b>Venue</b><div class="text-xs text-slate-500">${esc(p.venue.name)}</div></div><b>${money(p.package?p.package.price:p.venue.venuePrice)}</b></div>${p.package?`<div class="ep-selected-row"><div><b>Catering</b><div class="text-xs text-slate-500">${esc(p.package.name)} · included</div></div><span class="ep-badge ep-badge-selected">Combo</span></div>`:p.caterer?`<div class="ep-selected-row"><div><b>Catering</b><div class="text-xs text-slate-500">${esc(p.caterer.name)} · ${p.guests} plates</div></div><b>${money(p.caterer.price*p.guests)}</b></div>`:''}<div class="ep-selected-row"><div><b>Equipment</b><div class="text-xs text-slate-500">Continue using the existing CloudTentO inventory marketplace.</div></div><span class="ep-badge ep-badge-pending">Not added</span></div>`;epBudgetValue.textContent=money(b);epBudgetSpent.textContent=money(t);epBudgetRemaining.textContent=t<=b?money(b-t)+' remaining':money(t-b)+' over budget';epBudgetFill.style.width=Math.min(100,b?Math.round(t/b*100):0)+'%';show('epMyEventPanel',4)}
-window.saveEventPlan=()=>{save();if(EP_BACKEND)fetch(EP_BACKEND,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'event_plan',...ensure(),estimatedTotal:total(),createdAt:new Date().toISOString()})}).catch(()=>{});toast('Event plan saved')}
-window.requestCompleteQuote=()=>{let p=ensure();epEnquiryPreview.innerHTML=`<b>${esc(p.eventType)}</b> · ${esc(p.date)} · ${p.guests} guests<br>${esc(p.location)}<hr class="my-3"><b>Venue:</b> ${esc(p.venue?.name||'Not selected')}<br><b>Catering:</b> ${esc(p.package?.name||p.caterer?.name||'Not selected')}<br><b>Estimated current total:</b> ${money(total())}<br><span class="text-xs text-slate-500">Final availability and pricing require provider confirmation.</span>`;show('epEnquiryPanel',5)}
-window.sendCompleteEventWhatsApp=()=>{let p=ensure(),m=`📋 *CloudTentO Complete Event Enquiry*\\n\\n*Event ID:* ${p.eventId}\\n*Event:* ${p.eventType}\\n*Date:* ${p.date}\\n*Guests:* ${p.guests}\\n*Location:* ${p.location}\\n*Budget:* ₹${Number(p.budget).toLocaleString('en-IN')}\\n\\n*Venue:* ${p.venue?.name||'Not selected'}\\n*Package:* ${p.package?.name||'None'}\\n*Caterer:* ${p.package?'Included in venue package':(p.caterer?.name||'Not selected')}\\n*Estimated:* ₹${Number(total()).toLocaleString('en-IN')}\\n\\nPlease confirm availability, final pricing, inclusions, advance and cancellation terms.`;window.open('https://wa.me/919948680017?text='+encodeURIComponent(m),'_blank');save();toast('WhatsApp enquiry prepared')}
-function setMin(){let d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());epEventDate.min=d.toISOString().slice(0,10)}
-restore();setMin();if(eventPlan)openEventSetup();
-})();
-</script>
-
-<!-- Lightbox (if any) -->
-<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9998;align-items:center;justify-content:center;padding:20px;">
-  <span onclick="document.getElementById('lightbox').style.display='none'" style="position:fixed;top:16px;right:20px;color:white;font-size:28px;cursor:pointer;background:rgba(0,0,0,0.4);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;">&times;</span>
-  <img id="lightbox-img" src="" alt="Inventory photo" style="max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain;" />
-</div>
-
+    </section>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // Same Google Apps Script backend as the main marketplace —
+            // only the front-end has moved, not the data.
+            const GOOGLE_SCRIPT_URL =
+                'https://script.google.com/macros/s/AKfycbwVshavTK1yv5gBqvs--6gep0NdbJsbx4nEWmjyJy6sJWdGwAaeLC4y6pFpo4slxgWu6w/exec';
+
+            // ===== POPUP CONTROLS =====
+            window.showListSubmittedPopup = function(uid, pwaLink) {
+                const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+                const box = document.getElementById('listSubmittedUidBox');
+                if (box) {
+                    if (uid) {
+                        box.classList.remove('hidden');
+                        box.innerHTML =
+                            `<p><b>Your Vendor UID:</b> ${esc(uid)}</p>` +
+                            (pwaLink ?
+                                `<p><b>Your Vendor Dashboard Link:</b><br><a href="${esc(pwaLink)}" target="_blank" rel="noopener noreferrer" class="text-purple-600 font-semibold break-all">${esc(pwaLink)}</a></p>` :
+                                `<p>Your personal Vendor Dashboard link will be sent to you by WhatsApp once your listing is approved.</p>`) +
+                            `<p class="text-slate-400">Quote this UID if you contact us about your listing.</p>`;
+                    } else {
+                        box.classList.add('hidden');
+                        box.innerHTML = '';
+                    }
+                }
+                document.getElementById('listSubmittedPopup').classList.add('open');
+            };
+            window.closeListSubmittedPopup = function() {
+                document.getElementById('listSubmittedPopup').classList.remove('open');
+            };
+            document.querySelectorAll('.popup-overlay').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    if (e.target === this) this.classList.remove('open');
+                });
+            });
+
+            // ===== TOAST =====
+            function showToast(msg, icon = '✅') {
+                const toast = document.getElementById('toast');
+                const iconEl = toast.querySelector('i');
+                if (iconEl) {
+                    iconEl.className = icon === '⚠️' ? 'fa-solid fa-triangle-exclamation text-amber-400' :
+                        'fa-solid fa-circle-check text-green-400';
+                }
+                document.getElementById('toastMsg').textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 4000);
+            }
+            window.showToast = showToast;
+
+            // ===== VENDOR UID =====
+            function generateVendorUID(category) {
+                const catCode = String(category || 'GEN').replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase() || 'GEN';
+                const ts = Date.now().toString(36).toUpperCase();
+                const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
+                return `EVT-${catCode}-${ts}${rand}`;
+            }
+
+            // ===== VENDOR ONBOARDING WIZARD =====
+            (function() {
+                let currentStep = 1;
+                const totalSteps = 7;
+                const draft = {};
+
+                const stepEls = document.querySelectorAll('.wizard-step');
+                const progressBars = document.querySelectorAll('#wizardProgress > div');
+                const backBtn = document.getElementById('wBackBtn');
+                const nextBtn = document.getElementById('wNextBtn');
+                if (!nextBtn || !stepEls.length) return;
+
+                function showStep(n) {
+                    currentStep = n;
+                    stepEls.forEach(el => el.classList.toggle('hidden', Number(el.dataset.step) !== n));
+                    progressBars.forEach((bar, i) => {
+                        bar.className = 'h-1.5 flex-1 rounded-full ' + (i < n ? 'bg-purple-500' : 'bg-slate-200');
+                    });
+                    backBtn.classList.toggle('hidden', n === 1);
+                    nextBtn.textContent = n === totalSteps ? 'Submit Listing ✓' : 'Continue →';
+                    if (n === 7) {
+                        document.getElementById('wReviewBiz').textContent = draft.bizName || '—';
+                        document.getElementById('wReviewPhone').textContent = draft.phone || '—';
+                        document.getElementById('wReviewCat').textContent = draft.category || '—';
+                        document.getElementById('wReviewCity').textContent = draft.city || '—';
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                function validateStep(n) {
+                    if (n === 1 && !document.getElementById('wBizName').value.trim()) return 'Please enter your business name.';
+                    if (n === 2) {
+                        const p = document.getElementById('wPhone').value.replace(/\D/g, '');
+                        if (p.length < 10) return 'Please enter a valid 10-digit WhatsApp number.';
+                    }
+                    if (n === 3 && !draft.category) return 'Please pick a category.';
+                    if (n === 4 && !document.getElementById('wCity').value.trim()) return 'Please enter your city.';
+                    if (n === 5 && !document.getElementById('wItems').value.trim()) return 'Please list what you rent or provide.';
+                    if (n === 6 && !document.getElementById('wDescription').value.trim()) return 'Please add a short description.';
+                    return '';
+                }
+
+                function saveDraft() {
+                    draft.bizName = document.getElementById('wBizName').value.trim();
+                    draft.phone = document.getElementById('wPhone').value.trim();
+                    draft.city = document.getElementById('wCity').value.trim();
+                    draft.area = document.getElementById('wArea').value.trim();
+                    draft.pin = document.getElementById('wPin').value.trim();
+                    draft.items = document.getElementById('wItems').value.trim();
+                    draft.description = document.getElementById('wDescription').value.trim();
+                    draft.img1 = document.getElementById('wImg1').value.trim();
+                    draft.img2 = document.getElementById('wImg2').value.trim();
+                    draft.img3 = document.getElementById('wImg3').value.trim();
+                    try { localStorage.setItem('eventry_vendor_draft', JSON.stringify(draft)); } catch (e) {}
+                }
+
+                function loadDraft() {
+                    try {
+                        const saved = JSON.parse(localStorage.getItem('eventry_vendor_draft') || '{}');
+                        Object.assign(draft, saved);
+                        if (draft.bizName) document.getElementById('wBizName').value = draft.bizName;
+                        if (draft.phone) document.getElementById('wPhone').value = draft.phone;
+                        if (draft.city) document.getElementById('wCity').value = draft.city;
+                        if (draft.area) document.getElementById('wArea').value = draft.area;
+                        if (draft.pin) document.getElementById('wPin').value = draft.pin;
+                        if (draft.items) document.getElementById('wItems').value = draft.items;
+                        if (draft.description) document.getElementById('wDescription').value = draft.description;
+                        if (draft.img1) document.getElementById('wImg1').value = draft.img1;
+                        if (draft.img2) document.getElementById('wImg2').value = draft.img2;
+                        if (draft.img3) document.getElementById('wImg3').value = draft.img3;
+                        if (draft.category) {
+                            document.querySelectorAll('.w-cat-tile').forEach(t => t.classList.toggle('active', t.dataset.cat === draft.category));
+                        }
+                    } catch (e) {}
+                }
+
+                document.querySelectorAll('.w-cat-tile').forEach(tile => {
+                    tile.addEventListener('click', () => {
+                        document.querySelectorAll('.w-cat-tile').forEach(t => t.classList.remove('active'));
+                        tile.classList.add('active');
+                        draft.category = tile.dataset.cat;
+                        saveDraft();
+                    });
+                });
+
+                ['wBizName','wPhone','wCity','wArea','wPin','wItems','wDescription','wImg1','wImg2','wImg3'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.addEventListener('input', saveDraft);
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    const err = validateStep(currentStep);
+                    if (err) { showToast(err, '⚠️'); return; }
+                    saveDraft();
+                    if (currentStep < totalSteps) showStep(currentStep + 1);
+                    else submitWizard();
+                });
+
+                backBtn.addEventListener('click', () => {
+                    if (currentStep > 1) showStep(currentStep - 1);
+                });
+
+                function submitWizard() {
+                    const category = draft.category || 'Others';
+                    const uid = generateVendorUID(category);
+
+                    const waMsg =
+                        `📋 *New Eventry Vendor*\n\n*UID:* ${uid}\n*Business:* ${draft.bizName}\n*Category:* ${category}\n*Phone:* ${draft.phone}\n*City:* ${draft.city}\n*Area:* ${draft.area}\n*PIN:* ${draft.pin || '-'}\n*Items:* ${draft.items}\n*Description:* ${draft.description}`;
+                    window.open(`https://wa.me/919948680017?text=${encodeURIComponent(waMsg)}`, '_blank');
+
+                    const fd = new FormData();
+                    fd.append('action', 'onboard');
+                    fd.append('uid', uid);
+                    fd.append('bizName', draft.bizName || '');
+                    fd.append('category', category);
+                    fd.append('phone', draft.phone || '');
+                    fd.append('city', draft.city || '');
+                    fd.append('area', draft.area || '');
+                    fd.append('pin', draft.pin || '');
+                    fd.append('items', draft.items || '');
+                    fd.append('description', draft.description || '');
+                    fd.append('img1', draft.img1 || '');
+                    fd.append('img2', draft.img2 || '');
+                    fd.append('img3', draft.img3 || '');
+                    fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' }).catch(() => {});
+
+                    showListSubmittedPopup(uid, '');
+
+                    try { localStorage.removeItem('eventry_vendor_draft'); } catch (e) {}
+                    currentStep = 1;
+                    showStep(1);
+                    draft.category = null;
+                    document.querySelectorAll('.w-cat-tile').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.wizard-step input, .wizard-step textarea').forEach(el => el.value = '');
+                }
+
+                loadDraft();
+                showStep(1);
+            })();
+        })();
+    </script>
 </body>
 </html>
