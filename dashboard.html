@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EventDesk — My Dashboard</title>
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#7c3aed" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  body { font-family:'Inter',sans-serif; background:#f8fafc; }
+  .font-display { font-family:'Sora',sans-serif; }
+  .card { background:#fff; border-radius:16px; border:1px solid #e2e8f0; padding:20px; }
+  .stat-num { font-family:'Sora',sans-serif; font-weight:800; }
+  .btn { padding:10px 18px; border-radius:12px; font-weight:700; cursor:pointer; border:none; transition:.2s; }
+  .btn-primary { background:#7c3aed; color:#fff; }
+  .btn-primary:hover { background:#6d28d9; }
+  .btn-ghost { background:#f1f5f9; color:#334155; }
+  .input { width:100%; padding:10px 14px; border:1px solid #cbd5e1; border-radius:10px; outline:none; font-size:14px; }
+  .input:focus { border-color:#7c3aed; box-shadow:0 0 0 3px rgba(124,58,237,.15); }
+  .badge { padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
+  .badge-paid { background:#dcfce7; color:#166534; }
+  .badge-pending { background:#fef3c7; color:#92400e; }
+  .modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; padding:16px; z-index:999; }
+  .modal-bg.open { display:flex; }
+  .modal-box { background:#fff; border-radius:20px; max-width:480px; width:100%; padding:24px; max-height:90vh; overflow-y:auto; }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-9 h-9 bg-purple-100 rounded-xl flex items-center justify-center text-lg">🏪</div>
+      <div>
+        <div class="font-display font-extrabold text-slate-900 leading-tight" id="bizName">Loading…</div>
+        <div class="text-[11px] text-slate-500" id="bizMeta">—</div>
+      </div>
+    </div>
+    <a href="http://eventry.online" class="text-xs font-bold text-purple-700 border-2 border-purple-200 px-3 py-1.5 rounded-xl hover:bg-purple-50">
+      <i class="fa-solid fa-store"></i> View on Eventry
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-6">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+    <div class="card"><div class="text-xs text-slate-500 font-bold uppercase">Bookings</div><div class="stat-num text-2xl text-slate-900" id="statBookings">—</div></div>
+    <div class="card"><div class="text-xs text-slate-500 font-bold uppercase">Upcoming</div><div class="stat-num text-2xl text-blue-600" id="statUpcoming">—</div></div>
+    <div class="card"><div class="text-xs text-slate-500 font-bold uppercase">Collected</div><div class="stat-num text-2xl text-emerald-600" id="statCollected">—</div></div>
+    <div class="card"><div class="text-xs text-slate-500 font-bold uppercase">Outstanding</div><div class="stat-num text-2xl text-amber-600" id="statOutstanding">—</div></div>
+  </div>
+
+  <div class="flex flex-wrap gap-2 mb-4">
+    <button onclick="openBookingModal()" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Booking</button>
+    <button onclick="loadData()" class="btn btn-ghost"><i class="fa-solid fa-rotate"></i> Refresh</button>
+  </div>
+
+  <div class="card mb-6">
+    <h3 class="font-display font-extrabold text-slate-900 mb-3">Bookings</h3>
+    <div id="bookingsList" class="space-y-2">
+      <p class="text-sm text-slate-400 py-6 text-center">Loading…</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="font-display font-extrabold text-slate-900 mb-3">Your Public Listing</h3>
+    <div id="profilePreview" class="text-sm text-slate-600">—</div>
+  </div>
+</main>
+
+<!-- Booking Modal -->
+<div class="modal-bg" id="bookingModal">
+  <div class="modal-box">
+    <h3 class="font-display font-extrabold text-slate-900 text-xl mb-4" id="modalTitle">New Booking</h3>
+    <form id="bookingForm" class="space-y-3">
+      <input type="hidden" id="f_bookingId" />
+      <div class="grid grid-cols-2 gap-3">
+        <input class="input" id="f_customerName" placeholder="Customer name" required />
+        <input class="input" id="f_customerPhone" placeholder="Phone" required />
+      </div>
+      <input class="input" id="f_eventDate" type="date" required />
+      <textarea class="input" id="f_items" rows="2" placeholder="Items rented"></textarea>
+      <div class="grid grid-cols-2 gap-3">
+        <input class="input" id="f_totalAmount" type="number" placeholder="Total ₹" required />
+        <input class="input" id="f_advancePaid" type="number" placeholder="Advance ₹" value="0" />
+      </div>
+      <textarea class="input" id="f_notes" rows="2" placeholder="Notes (optional)"></textarea>
+      <div class="flex gap-2 pt-2">
+        <button type="submit" class="btn btn-primary flex-1">Save</button>
+        <button type="button" onclick="closeBookingModal()" class="btn btn-ghost flex-1">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const API = 'PASTE_YOUR_NEW_WEB_APP_URL_HERE';
+const params = new URLSearchParams(location.search);
+const UID = params.get('uid');
+const TOKEN = params.get('t');
+
+if (!UID || !TOKEN) {
+  document.body.innerHTML = '<div style="padding:40px;text-align:center;font-family:Inter,sans-serif;">' +
+    '<h2>Invalid link</h2><p>Use the link sent to your WhatsApp.</p></div>';
+  throw new Error('Missing uid/token');
+}
+
+const qs = () => 'uid=' + encodeURIComponent(UID) + '&t=' + encodeURIComponent(TOKEN);
+
+async function loadData() {
+  try {
+    const res = await fetch(API + '?action=desk&' + qs(), { cache: 'no-store' });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'Failed');
+    render(json);
+  } catch (err) {
+    document.getElementById('bookingsList').innerHTML =
+      '<p class="text-sm text-red-500 py-6 text-center">Could not load data. Refresh the page.</p>';
+  }
+}
+
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function render(data) {
+  document.getElementById('bizName').textContent = data.profile.bizName || 'Your Business';
+  document.getElementById('bizMeta').textContent =
+    (data.profile.category || '') + (data.profile.city ? ' · ' + data.profile.city : '');
+
+  const s = data.summary || {};
+  document.getElementById('statBookings').textContent = s.totalBookings || 0;
+  document.getElementById('statUpcoming').textContent = s.upcoming || 0;
+  document.getElementById('statCollected').textContent = '₹' + (s.collectedThisMonth || 0).toLocaleString('en-IN');
+  document.getElementById('statOutstanding').textContent = '₹' + (s.outstanding || 0).toLocaleString('en-IN');
+
+  const list = document.getElementById('bookingsList');
+  if (!data.bookings || data.bookings.length === 0) {
+    list.innerHTML = '<p class="text-sm text-slate-400 py-6 text-center">No bookings yet. Tap "New Booking" to add one.</p>';
+  } else {
+    list.innerHTML = data.bookings.map(b => {
+      const cls = b.status === 'Paid' ? 'badge-paid' : 'badge-pending';
+      return `<div class="border border-slate-200 rounded-xl p-3 flex items-start justify-between gap-3">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-slate-900">${esc(b.customerName)}</span>
+            <span class="badge ${cls}">${esc(b.status)}</span>
+            <span class="text-xs text-slate-400">${esc(b.bookingId)}</span>
+          </div>
+          <div class="text-xs text-slate-500 mt-1">📅 ${esc(b.eventDate)} · 📞 ${esc(b.customerPhone)}</div>
+          <div class="text-xs text-slate-600 mt-1">${esc(b.items || '')}</div>
+          <div class="text-sm mt-1">Total ₹${b.totalAmount} · Paid ₹${b.advancePaid} · <b class="text-amber-700">Due ₹${b.balanceDue}</b></div>
+        </div>
+        <div class="flex flex-col gap-1">
+          <button onclick='editBooking(${JSON.stringify(b).replace(/'/g,"&#39;")})' class="text-xs font-bold text-purple-700 hover:underline">Edit</button>
+          <button onclick="recordPayment('${b.bookingId}', ${b.balanceDue})" class="text-xs font-bold text-emerald-700 hover:underline">Pay</button>
+          <button onclick="deleteBooking('${b.bookingId}')" class="text-xs font-bold text-red-600 hover:underline">Delete</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  const imgs = [data.profile.img1, data.profile.img2, data.profile.img3].filter(Boolean);
+  document.getElementById('profilePreview').innerHTML = `
+    <p><b>${esc(data.profile.bizName||'')}</b> · ${esc(data.profile.category||'')}</p>
+    <p>${esc(data.profile.area||'')}${data.profile.city?' · '+esc(data.profile.city):''}</p>
+    <p class="mt-1">${esc(data.profile.description||'')}</p>
+    <p class="mt-1"><b>Items:</b> ${esc(data.profile.items||'')}</p>
+    ${imgs.length? '<div class="flex gap-2 mt-2">'+imgs.map(u=>`<img src="${esc(u)}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;" onerror="this.style.display='none'"/>`).join('')+'</div>' : ''}
+  `;
+}
+
+function openBookingModal(b) {
+  document.getElementById('modalTitle').textContent = b ? 'Edit Booking' : 'New Booking';
+  document.getElementById('f_bookingId').value = b ? b.bookingId : '';
+  document.getElementById('f_customerName').value = b ? b.customerName : '';
+  document.getElementById('f_customerPhone').value = b ? b.customerPhone : '';
+  document.getElementById('f_eventDate').value = b ? b.eventDate : '';
+  document.getElementById('f_items').value = b ? b.items : '';
+  document.getElementById('f_totalAmount').value = b ? b.totalAmount : '';
+  document.getElementById('f_advancePaid').value = b ? b.advancePaid : 0;
+  document.getElementById('f_notes').value = b ? b.notes : '';
+  document.getElementById('bookingModal').classList.add('open');
+}
+function closeBookingModal(){ document.getElementById('bookingModal').classList.remove('open'); }
+function editBooking(b){ openBookingModal(b); }
+
+document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData();
+  const id = document.getElementById('f_bookingId').value;
+  fd.append('action', id ? 'desk_update_booking' : 'desk_add_booking');
+  fd.append('uid', UID);
+  fd.append('t', TOKEN);
+  if (id) fd.append('bookingId', id);
+  fd.append('customerName', document.getElementById('f_customerName').value);
+  fd.append('customerPhone', document.getElementById('f_customerPhone').value);
+  fd.append('eventDate', document.getElementById('f_eventDate').value);
+  fd.append('items', document.getElementById('f_items').value);
+  fd.append('totalAmount', document.getElementById('f_totalAmount').value);
+  fd.append('advancePaid', document.getElementById('f_advancePaid').value);
+  fd.append('notes', document.getElementById('f_notes').value);
+  await fetch(API, { method: 'POST', body: fd, mode: 'no-cors' });
+  closeBookingModal();
+  setTimeout(loadData, 800);
+});
+
+async function recordPayment(bookingId, currentBalance) {
+  const amt = prompt('Amount received (₹):', currentBalance);
+  if (!amt) return;
+  const fd = new FormData();
+  fd.append('action', 'desk_record_payment');
+  fd.append('uid', UID); fd.append('t', TOKEN);
+  fd.append('bookingId', bookingId); fd.append('amount', amt);
+  await fetch(API, { method: 'POST', body: fd, mode: 'no-cors' });
+  setTimeout(loadData, 800);
+}
+
+async function deleteBooking(bookingId) {
+  if (!confirm('Delete this booking permanently?')) return;
+  const fd = new FormData();
+  fd.append('action', 'desk_delete_booking');
+  fd.append('uid', UID); fd.append('t', TOKEN);
+  fd.append('bookingId', bookingId);
+  await fetch(API, { method: 'POST', body: fd, mode: 'no-cors' });
+  setTimeout(loadData, 800);
+}
+
+loadData();
+</script>
+</body>
+</html>
